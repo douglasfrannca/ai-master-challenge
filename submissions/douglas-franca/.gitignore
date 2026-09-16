@@ -1,0 +1,31 @@
+# Dados brutos: baixar com scripts/download_data.py
+data/
+*.csv.gz
+*.parquet
+!app/assets/*.parquet
+
+# Ambiente Python
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.ruff_cache/
+.ipynb_checkpoints/
+
+# Modelos e artefatos pesados
+*.pkl
+*.joblib
+
+# Segredos
+.env
+.env.*
+!.env.example
+
+# Material de calibração local (reviews públicos), fora da entrega
+.intel/
+
+# Configuração local do Claude Code
+.claude/settings.local.json
+
+# Sistema
+.DS_Store
