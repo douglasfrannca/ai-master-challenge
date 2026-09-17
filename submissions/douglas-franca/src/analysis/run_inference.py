@@ -8,6 +8,7 @@ Uso: uv run python src/analysis/run_inference.py
 """
 
 import json
+import sys
 from itertools import combinations
 from pathlib import Path
 
@@ -21,16 +22,17 @@ import statsmodels.formula.api as smf
 from scipy import stats
 from sklearn.ensemble import HistGradientBoostingRegressor
 from sklearn.model_selection import GroupKFold, cross_val_score
-from statsmodels.stats.multitest import multipletests
 
 ROOT = Path(__file__).resolve().parents[2]
+sys.path.insert(0, str(ROOT))
+from src.decision.rules import SESOI_PP as SESOI  # noqa: E402
+from src.decision.stats import Z90, Z95, Z_POWER, compare, finalize  # noqa: E402
+
 RAW = ROOT / "data" / "raw" / "social_media_dataset.csv"
 TABLES = ROOT / "outputs" / "tables"
 FIGURES = ROOT / "outputs" / "figures"
 
-SESOI = 1.0  # p.p. de taxa de engajamento (decisão do Douglas, G3)
 MAIN = ["Instagram", "TikTok", "YouTube"]
-Z95, Z90, Z_POWER = stats.norm.ppf(0.975), stats.norm.ppf(0.95), stats.norm.ppf(0.80)
 TIER_BINS = [0, 10_000, 50_000, 100_000, 500_000, np.inf]
 TIER_LABELS = ["<10K", "10–50K", "50–100K", "100–500K", "500K–1M"]
 COLORS = {"surface": "#fcfcfb", "ink": "#0b0b0b", "ink2": "#52514e", "grid": "#e4e3df",
@@ -51,33 +53,6 @@ def load() -> pd.DataFrame:
     df["hashtag_count"] = n_tags.clip(upper=3).map({0: "0", 1: "1", 2: "2", 3: "3+"})
     df["sponsored"] = df.is_sponsored.astype(int)
     return df
-
-
-def verdict(diff: float, se: float, p_adj: float) -> str:
-    lo90, hi90 = diff - Z90 * se, diff + Z90 * se
-    equivalent = lo90 > -SESOI and hi90 < SESOI
-    significant = p_adj < 0.05
-    if equivalent and significant:
-        return "DIFERENTE, MAS IRRELEVANTE"
-    if equivalent:
-        return "EQUIVALENTE"
-    if significant:
-        return "DIFERENTE"
-    return "INCONCLUSIVO"
-
-
-def compare(a: pd.Series, b: pd.Series) -> dict:
-    diff = a.mean() - b.mean()
-    se = np.sqrt(a.var(ddof=1) / len(a) + b.var(ddof=1) / len(b))
-    return {"n_grupo": len(a), "n_resto": len(b), "media_grupo": a.mean(), "diferenca_pp": diff, "se": se,
-            "ic95_inf": diff - Z95 * se, "ic95_sup": diff + Z95 * se,
-            "p": 2 * stats.norm.sf(abs(diff / se)), "mde_pp": (Z95 + Z_POWER) * se}
-
-
-def finalize(table: pd.DataFrame) -> pd.DataFrame:
-    table["p_ajustado_bh"] = multipletests(table.p, method="fdr_bh")[1]
-    table["veredito"] = [verdict(d, s, p) for d, s, p in zip(table.diferenca_pp, table.se, table.p_ajustado_bh)]
-    return table
 
 
 def level_vs_rest(df: pd.DataFrame, factors: dict[str, str]) -> pd.DataFrame:

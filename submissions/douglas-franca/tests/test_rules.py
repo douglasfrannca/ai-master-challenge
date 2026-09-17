@@ -41,6 +41,12 @@ def test_relevant_effect_that_pays_scales():
     assert cycle_decision(r)[0] == "Escalar"
 
 
+def test_scale_reason_does_not_mention_money_when_test_has_no_cost():
+    decision, reason = cycle_decision(CycleResult(effect_pp=2.0, ci95_low=1.2, ci95_high=2.8))
+    assert decision == "Escalar"
+    assert "break-even" not in reason and "sem custo" in reason
+
+
 def test_relevant_effect_below_break_even_stops():
     r = CycleResult(effect_pp=2.0, ci95_low=1.2, ci95_high=2.8, return_over_break_even=-100)
     assert cycle_decision(r)[0] == "Parar"

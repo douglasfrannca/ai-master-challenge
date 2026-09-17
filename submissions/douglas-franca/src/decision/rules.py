@@ -29,6 +29,15 @@ def break_even_fee(incremental_sales: float, unit_margin: float, production_cost
     return incremental_sales * unit_margin - production_cost
 
 
+def sales_to_break_even(fee: float, unit_margin: float, production_cost: float = 0.0) -> float:
+    """Vendas incrementais necessárias para o contrato empatar: (fee + produção) / margem unitária."""
+    if unit_margin <= 0:
+        raise ValueError("a margem unitária precisa ser positiva")
+    if fee < 0 or production_cost < 0:
+        raise ValueError("fee e produção não podem ser negativos")
+    return (fee + production_cost) / unit_margin
+
+
 def engagement_value_ceiling(views_per_post: float, lift_pp: float, value_per_interaction: float,
                              posts: int = 1) -> float:
     """Valor máximo gerado pelo aumento de engajamento: views × lift × valor de cada interação."""
@@ -67,7 +76,9 @@ def cycle_decision(r: CycleResult, sesoi: float = SESOI_PP) -> tuple[str, str]:
     if r.ci95_high < sesoi:
         return "Parar", f"ganho relevante descartado (IC 95% não alcança +{sesoi:g} p.p.)"
     if r.ci95_low >= sesoi and pays:
-        return "Escalar", f"efeito acima da régua (IC 95% ≥ +{sesoi:g} p.p.) e retorno acima do break-even"
+        money = ("teste sem custo adicional" if r.return_over_break_even is None
+                 else "retorno acima do break-even")
+        return "Escalar", f"efeito acima da régua (IC 95% ≥ +{sesoi:g} p.p.); {money}"
     return "Replicar", "resultado promissor, mas o intervalo ainda cruza a régua"
 
 
