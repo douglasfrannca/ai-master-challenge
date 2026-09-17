@@ -3,7 +3,7 @@
 ## Sobre mim
 
 - **Nome:** Douglas França
-- **LinkedIn:** _[a preencher]_
+- **LinkedIn:** [linkedin.com/in/douglas-frança](https://www.linkedin.com/in/douglas-fran%C3%A7a/)
 - **Challenge escolhido:** 004 — Estratégia Social Media
 
 ---
@@ -169,7 +169,7 @@ Tudo abaixo está registrado, com data e alternativa rejeitada, em [`process-log
 - [x] **Chat exports:** respostas literais das 5 IAs do baseline ([`process-log/baseline/`](process-log/baseline/))
 - [ ] **Transcript da sessão de trabalho:** [`process-log/chat-exports/`](process-log/chat-exports/) _(exportar no G9)_
 - [x] **Screenshots do app:** [`outputs/figures/app/`](outputs/figures/app/)
-- [ ] **Screenshots das conversas com as IAs:** [`process-log/screenshots/`](process-log/screenshots/) _(pendente)_
+- [ ] **Screenshots das conversas com as IAs:** [`process-log/screenshots/`](process-log/screenshots/) _(ChatGPT ✅ · demais em andamento)_
 - [x] **Git history:** um commit por gate ([branch `submission/douglas-franca`](https://github.com/douglasfrannca/ai-master-challenge/commits/submission/douglas-franca))
 - [x] **Decisões humanas e erros da IA:** [`decisions.md`](process-log/decisions.md) · [`ai-errors.md`](process-log/ai-errors.md)
 - [x] **Outro:** app no ar ([decision-social-doug.streamlit.app](https://decision-social-doug.streamlit.app)), 24 testes automáticos, scripts reproduzíveis
