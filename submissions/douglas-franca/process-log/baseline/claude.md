@@ -4,7 +4,7 @@
 |---|---|
 | Data | 2026-09-16 |
 | Operado por | Douglas França (conversa nova, sem contexto da submissão) |
-| Entrada | Brief do Challenge 004; depois, upload do CSV. Gerou artifact (https://claude.ai/artifact/1N2cBrahGPX7MSmjdGeYkC) e relatório .docx (convertido em `claude-relatorio-docx.md`) |
+| Entrada | Brief do Challenge 004 colado como texto ("PASTED"), sem contexto; depois, upload do CSV. Modelo: **Claude Opus 5 (esforço alto)**, o mesmo da orquestração desta submissão. Executou 9 + 19 comandos, publicou o artifact "Painel de Decisão — Social Media" (https://claude.ai/artifact/1N2cBrahGPX7MSmjdGeYkC) e um relatório .docx de 10 páginas (convertido em `claude-relatorio-docx.md`). Prints `g1-claude-01` a `16` |
 | Recebeu os dados? | Sim (upload do CSV completo) |
 | Checagem numérica | `outputs/tables/g1-baseline-claims-check.csv` |
 
