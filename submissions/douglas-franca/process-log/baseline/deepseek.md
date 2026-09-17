@@ -4,7 +4,7 @@
 |---|---|
 | Data | 2026-09-16 |
 | Operado por | Douglas França (conversa nova, sem contexto da submissão) |
-| Entrada | Brief do Challenge 004; depois, upload do CSV |
+| Entrada | Brief do Challenge 004 enviado como **arquivo `README.txt`** (4,79 KB), sem texto adicional; depois, upload do `social_media_dataset.csv` (22,21 MB). Prints `g1-deepseek-01` a `09` |
 | Recebeu os dados? | Sim, mas truncado: "Length limit reached. DeepSeek can only read the first 37%". O raciocínio interno (em inglês) veio junto na resposta |
 | Checagem numérica | `outputs/tables/g1-baseline-claims-check.csv` |
 
