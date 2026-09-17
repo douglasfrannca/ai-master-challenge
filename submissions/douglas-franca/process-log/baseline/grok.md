@@ -4,7 +4,7 @@
 |---|---|
 | Data | 2026-09-16 |
 | Operado por | Douglas França (conversa nova, sem contexto da submissão) |
-| Entrada | Brief do Challenge 004 |
+| Entrada | Brief do Challenge 004 colado como texto, sem contexto (prints `g1-grok-01` a `03`). "Trabalhou por 6m 6s" e citou 35 fontes |
 | Recebeu os dados? | A própria IA baixou o dataset via kagglehub em ambiente próprio |
 | Checagem numérica | `outputs/tables/g1-baseline-claims-check.csv` |
 
