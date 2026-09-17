@@ -82,7 +82,7 @@ with st.sidebar:
     st.subheader("Status")
     posts = load_posts()
     st.write(f"🟢 App no ar · {len(posts):,} posts carregados".replace(",", "."))
-    st.write("Health check do servidor: `/_stcore/health`")
+    st.write("Health check: `/healthz` (online) · `/_stcore/health` (local)")
     st.divider()
     st.markdown("**Como usar, na ordem do ciclo**\n\n"
                 "1. Checar se os dados servem\n2. Acompanhar com margem de erro\n"

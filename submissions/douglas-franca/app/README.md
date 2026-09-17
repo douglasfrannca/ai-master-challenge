@@ -1,5 +1,7 @@
 # Decision Gate
 
+**App no ar:** https://decision-social-doug.streamlit.app · health check: https://decision-social-doug.streamlit.app/healthz
+
 Ferramenta do processo redesenhado (`docs/process/03-to-be.md`). Quatro abas, na ordem do ciclo:
 
 | Aba | Etapa do processo | O que faz |
@@ -25,7 +27,7 @@ uv run streamlit run app/streamlit_app.py
 2. **Create app** → repositório `douglasfrannca/ai-master-challenge`, branch `submission/douglas-franca`.
 3. **Main file path:** `submissions/douglas-franca/app/streamlit_app.py`.
 4. **Advanced settings:** Python 3.12. As dependências vêm de `app/requirements.txt`.
-5. Health check: `https://<app>.streamlit.app/_stcore/health` responde `ok`.
+5. Health check: `https://<app>.streamlit.app/healthz` responde `{"status":"ok"}`.
 
 ## Arquivos em `assets/`
 | Arquivo | Origem |
