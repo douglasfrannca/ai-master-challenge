@@ -4,7 +4,8 @@
 |---|---|
 | Data | 2026-09-16 |
 | Operado por | Douglas França (conversa nova, sem contexto da submissão) |
-| Entrada | Somente o brief do Challenge 004 (confirmado por Douglas). A abertura "Sim." não responde a nenhuma pergunta anterior; provável efeito de memória/personalização da conta |
+| Entrada | Somente o brief do Challenge 004, colado como primeira mensagem (print `g1-chatgpt-00a-brief-colado.png`) |
+| Como respondeu | Abriu com uma frase curta, **pesquisou em 5 sites** e só então escreveu a resposta longa ("Pensou por 1m 48s"). O texto abaixo foi copiado a partir da resposta longa, que começa em "Sim."; a abertura está no print `g1-chatgpt-00b-inicio-resposta.png`: "Esse desafio tem espaço para uma entrega muito forte, porque ele não está pedindo só 'análise de social': está testando se você consegue transformar dado bruto em decisão executiva + ferramenta recorrente. Vou estruturar a solução como se fosse uma submissão de AI Master e, se eu conseguir acessar o dataset diretamente, já avanço para os testes e findings reais." |
 | Recebeu os dados? | Não. A IA pediu o CSV no final |
 | Checagem numérica | `outputs/tables/g1-baseline-claims-check.csv` |
 
