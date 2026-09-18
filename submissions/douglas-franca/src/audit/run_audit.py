@@ -6,6 +6,7 @@ Saídas:
   outputs/tables/dq-poisson.csv       teste de dispersão por métrica e por segmento
   outputs/tables/dq-independence.csv  associação entre colunas categóricas (Cramér's V)
   outputs/tables/dq-profile.csv       perfil por coluna
+  outputs/tables/dq-segment-amplitude.csv  amplitude da taxa de engajamento por segmento
 """
 
 from pathlib import Path
@@ -116,6 +117,26 @@ def main() -> None:
         + "λ varia entre segmentos no máximo " + ", ".join(f"{m} {v:.2f}%" for m, v in lam_spread.items()),
         "cada métrica é sorteada de uma Poisson com a MESMA média para todo post: nenhuma característica influencia o resultado. "
         "Contagens reais de engajamento são sobredispersas (var/média >> 1)")
+
+    # Amplitude da taxa de engajamento dentro de cada segmento: sustenta a afirmação
+    # "as diferenças observadas entre segmentos são ruído" em docs/data-quality-report.md.
+    amplitude = (
+        pd.DataFrame(
+            [
+                {
+                    "segmento": s,
+                    "n_niveis": df[s].nunique(),
+                    "er_pp_min": df.groupby(s).er_pp.mean().min(),
+                    "er_pp_max": df.groupby(s).er_pp.mean().max(),
+                    "amplitude_pp": df.groupby(s).er_pp.mean().max() - df.groupby(s).er_pp.mean().min(),
+                }
+                for s in SEGMENTS
+            ]
+        )
+        .sort_values("amplitude_pp", ascending=False)
+        .reset_index(drop=True)
+    )
+    amplitude.to_csv(TABLES / "dq-segment-amplitude.csv", index=False)
 
     corr = df[METRICS + ["follower_count"]].corr()
     add("DQ-06", "CRÍTICA", "métricas independentes entre si",

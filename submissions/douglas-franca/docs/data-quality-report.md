@@ -18,7 +18,7 @@ Numa distribuição de Poisson, **a variância é igual à média**. Contagens d
 - Nenhuma métrica rejeita Poisson (p > 0,05 em todas).
 - Nos **76 segmentos** testados (plataforma, formato, categoria, patrocínio e idade da audiência), a razão fica entre **0,94 e 1,04**, e a média (λ) varia no máximo **0,29%** entre segmentos (`dq-poisson.csv`).
 - As métricas são **independentes entre si**: r(likes, views) = 0,001; r(shares, views) = −0,007; r(views, seguidores) = 0,005. No mundo real, mais views trazem mais likes.
-- **Consequência:** o engajamento é praticamente constante (19,9%) *por construção*. As diferenças observadas entre segmentos (≤ 0,012 p.p.) são o ruído esperado de um sorteio. Os testes de significância do baseline estavam certos, mas não diziam **por quê**.
+- **Consequência:** o engajamento é praticamente constante (19,9%) *por construção*. As diferenças observadas entre segmentos vão no máximo a **0,0126 p.p.** (idade da audiência; `dq-segment-amplitude.csv`) e são o ruído esperado de um sorteio. Os testes de significância do baseline estavam certos, mas não diziam **por quê**.
 
 ## 2. Achados
 
