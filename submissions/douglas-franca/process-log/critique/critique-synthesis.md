@@ -12,7 +12,7 @@ A entrega passou por crítica **antes** do PR, com dois tipos de revisor:
 | # | Apontamento | Decisão | Status | Verificação |
 |---|---|---|---|---|
 | 1 | Process log incompleto: `chat-exports/` e `critique/` vazias; linha do tempo por gate só com o G0 | Preencher | Linha do tempo G0–G8 e esta síntese: **feito**. Transcript da sessão: _pendente_ | `process-log/README.md` |
-| 2 | `app/assets/posts.parquet` tinha as 52.214 linhas do dataset (o PR #96 foi reprovado em higiene por isso) | **Douglas:** "Baixar ao abrir" | **Feito**: o app carrega os dados por `src/app_data.py` (local ou Kaggle na 1ª abertura, 4,8 s a frio); conteúdo idêntico ao anterior | `git ls-files \| grep parquet` → vazio; commit `c976a8e` |
+| 2 | `app/assets/posts.parquet` tinha as 52.214 linhas do dataset (o PR #96 foi reprovado em higiene por isso) | Remover do repositório | **Feito**: o app carrega os dados por `src/app_data.py` (local ou Kaggle na 1ª abertura, 4,8 s a frio); conteúdo idêntico ao anterior | `git ls-files \| grep parquet` → vazio; commit `c976a8e` |
 | 3 | Único número sem tabela: "≤ 0,012 p.p." (real: 0,0126) | Corrigir e gerar a tabela | **Feito** | `outputs/tables/dq-segment-amplitude.csv`; commit `8cd775c` |
 | 4 | Data do PR em branco no README | Preencher no dia do PR | _no G9_ | `README.md` |
 | 5 | `curl` sem cookie entra em loop de redirecionamento no domínio `streamlit.app` | Documentar; é o login do próprio Streamlit Cloud | `/healthz` responde `200 {"status":"ok"}` com cookie; o app abre no navegador | `curl -c ck -b ck -L https://decision-social-doug.streamlit.app/healthz` |
@@ -51,7 +51,7 @@ Prints: `../screenshots/g8-chatgpt-01` a `09` e `g8-gemini-01`. **Gemini** respo
 | 21 | Threshold de seguidores sem número | Não existe threshold nos dados | **Mantido**: o threshold é financeiro e numérico (fee ≤ vendas × margem; R$ 646 por interação) |
 | 22 | ROI trocado por cenários hipotéticos | O arquivo não tem custo nem venda (DQ-12) | **Mantido** |
 | 23 | Quick wins são de governança, não de conteúdo | Intencional: sem medição, quick win de conteúdo seria palpite | **Mantido** |
-| 24 | Brief pede 4–6 h; a entrega não mostra o tempo gasto | — | **Sem mudança** (decisão do Douglas) |
+| 24 | Brief pede 4–6 h; a entrega não mostra o tempo gasto | — | **Sem mudança** no README |
 
 **Balanço:** 12 aceitos, 3 respondidos com análise nova (o veredito não mudou), 9 mantidos com justificativa.
 

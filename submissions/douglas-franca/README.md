@@ -31,7 +31,7 @@ Os dados provam a necessidade. Auditei os 52.214 posts antes de analisar: views,
 
 ### Abordagem
 
-Trabalhei em **gates**: cada etapa só fecha com uma decisão minha registrada em [`process-log/decisions.md`](process-log/decisions.md).
+Trabalhei em **gates**: as etapas de análise, processo, estratégia e ferramenta só fecham com uma decisão minha registrada em [`process-log/decisions.md`](process-log/decisions.md).
 
 | Gate | Pergunta | Resultado |
 |---|---|---|
@@ -41,7 +41,7 @@ Trabalhei em **gates**: cada etapa só fecha com uma decisão minha registrada e
 | **G4 · Processo** | Que operação gera dados assim, e como consertar? | Dois fluxos (conteúdo e parcerias), 8 pontos de falha, TO-BE em ciclo de 15/30 dias, matriz de IA, RACI, contrato de dados |
 | **G5 · Estratégia** | O que fazer na segunda-feira? | 7 decisões com dono e condição de parada, custo implícito com preços de mercado, 3 testes |
 | **G6 · Ferramenta** | Como rodar isso todo dia? | Decision Gate em 4 abas, 24 testes, publicado |
-| **G7 · Evidências** | Dá para auditar como a IA foi usada? | 21 decisões minhas, 25 erros da IA registrados no momento, 46 prints das 5 IAs do baseline e 10 da crítica |
+| **G7 · Evidências** | Dá para auditar como a IA foi usada? | 17 decisões minhas, 25 erros da IA registrados no momento, 46 prints das 5 IAs do baseline e 10 da crítica |
 | **G8 · Crítica adversarial** | Onde a entrega é fraca? | Um revisor calibrado nos reviews públicos do repositório reproduziu tudo do zero e apontou 5 problemas ([`review-verdict-round1.md`](reports/review-verdict-round1.md)); o ChatGPT fez 24 apontamentos: conferi cada um, aceitei 12, respondi 3 com análise nova e mantive 9 com justificativa (o Gemini não conseguiu ler o repositório). O que foi corrigido e como está em [`process-log/critique/`](process-log/critique/critique-synthesis.md) |
 
 **Escopo:** a empresa investe em **Instagram, TikTok e YouTube**. Bilibili e RedNote (também presentes no arquivo) entram só como referência, por não alcançarem o público brasileiro.
@@ -166,7 +166,7 @@ Tudo abaixo está registrado, com data e alternativa rejeitada, em [`process-log
 - **O que eu diria ao Head na segunda-feira:** "Os dados que você me enviou não servem para tomarmos uma decisão. Me explique de onde vocês retiraram estes dados. Vamos verificar os contratos sem custo e suspender novos patrocínios, medir custo contra vendas de cada contrato, analisar a cada 15 dias e fechar um ciclo a cada 30."
 - **Como a operação funciona, pela minha experiência:** o gestor de parcerias fecha o contrato, que fica no e-mail e no CRM; o resultado chega por relatório e dashboard. Isso mudou o diagnóstico: o custo existe, mas **não chega ao post**. O brief não descreve a operação, então isso entra no AS-IS como **premissa a validar na semana 1**.
 - **Não perder o brief de vista:** exigi que conteúdo orgânico e parcerias tivessem o mesmo peso no processo.
-- **Depois da crítica adversarial (G8):** tirei o dataset do repositório; o README passou a abrir pelo processo; a suspensão de patrocínios virou **regra de entrada** (contrato novo só se nascer medível, exceção só com aprovação do Head), porque suspender seria uma decisão que o próprio arquivo não sustenta; e o processo atual passou a ser tratado como premissa a validar.
+- **Depois da crítica adversarial (G8):** a suspensão de patrocínios virou **regra de entrada** (contrato novo só se nascer medível, exceção só com aprovação do Head), porque suspender seria uma decisão que o próprio arquivo não sustenta; e o processo atual passou a ser tratado como premissa a validar.
 - **Preço de mercado:** trazer os fees reais de influenciadores transformou "o engajamento não paga" numa conta concreta.
 
 ---
