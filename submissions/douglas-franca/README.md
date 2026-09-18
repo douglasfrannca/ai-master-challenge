@@ -166,7 +166,7 @@ Tudo abaixo está registrado, com data e alternativa rejeitada, em [`process-log
 - **O que eu diria ao Head na segunda-feira:** "Os dados que você me enviou não servem para tomarmos uma decisão. Me explique de onde vocês retiraram estes dados. Vamos verificar os contratos sem custo e suspender novos patrocínios, medir custo contra vendas de cada contrato, analisar a cada 15 dias e fechar um ciclo a cada 30."
 - **Como a operação funciona, pela minha experiência:** o gestor de parcerias fecha o contrato, que fica no e-mail e no CRM; o resultado chega por relatório e dashboard. Isso mudou o diagnóstico: o custo existe, mas **não chega ao post**. O brief não descreve a operação, então isso entra no AS-IS como **premissa a validar na semana 1**.
 - **Não perder o brief de vista:** exigi que conteúdo orgânico e parcerias tivessem o mesmo peso no processo.
-- **Depois da crítica adversarial (G8):** a suspensão de patrocínios virou **regra de entrada** (contrato novo só se nascer medível, exceção só com aprovação do Head), porque suspender seria uma decisão que o próprio arquivo não sustenta; e o processo atual passou a ser tratado como premissa a validar.
+- **Depois da crítica adversarial (G8):** o README passou a abrir pelo processo; a suspensão de patrocínios virou **regra de entrada** (contrato novo só se nascer medível, exceção só com aprovação do Head), porque suspender seria uma decisão que o próprio arquivo não sustenta; e o processo atual passou a ser tratado como premissa a validar.
 - **Preço de mercado:** trazer os fees reais de influenciadores transformou "o engajamento não paga" numa conta concreta.
 
 ---

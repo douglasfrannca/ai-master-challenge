@@ -28,4 +28,4 @@ Os gates de análise, processo, estratégia, ferramenta e crítica (G1–G6, G8)
 | G5 Estratégia | 2026-09-16 | `c0bb778` | Estratégia aprovada; preços de mercado para o custo implícito (pesquisa minha, com fontes) | `reports/strategy.md`, `outputs/tables/str-*.csv`, `tests/test_rules.py` |
 | G6 Ferramenta | 2026-09-16/17 | `07e8a90`, `c71f65f` | Escopo em 4 telas, sem IA generativa; publicar online | `app/`, `tests/`, `outputs/figures/app/`, app no ar |
 | G7 Evidências | 2026-09-17 | `1e7c507` … `df2f903` | — (etapa operacional) | `README.md`, `reports/executive-one-pager.md`, `screenshots/` |
-| G8 Crítica | 2026-09-18 | `8cd775c`, `c976a8e`, … | Suspensão de patrocínio vira regra de entrada; processo atual vira premissa a validar | `reports/review-verdict-round1.md`, `critique/critique-synthesis.md` |
+| G8 Crítica | 2026-09-18 | `8cd775c`, `c976a8e`, … | README abre pelo processo; suspensão de patrocínio vira regra de entrada; processo atual vira premissa a validar | `reports/review-verdict-round1.md`, `critique/critique-synthesis.md` |
