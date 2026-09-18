@@ -6,7 +6,9 @@
 | Operado por | Douglas França (conversa nova, sem contexto da submissão) |
 | Entrada | Brief do Challenge 004 |
 | Recebeu os dados? | Não. A IA declarou ter **criado um dataset sintético próprio** e gerou PDF + XLSX a partir dele |
+| Modelo | Gemini Pro (seletor "Pro" visível no print) |
 | Checagem numérica | `outputs/tables/g1-baseline-claims-check.csv` |
+| Prints | `../screenshots/g1-gemini-01` a `07` (barra lateral recortada nos prints da conversa) |
 
 ## Resposta literal
 
@@ -116,3 +118,18 @@ YouTube Shorts. O roteiro deve focar na transformação imediata.
 Daily Tracking: Substitua as planilhas complexas pelo Dashboard interativo focado em ER
 (Engagement Rate) por Tier de Influenciador.
 ~~~~
+
+## A confissão, no "Process Log" do próprio Gemini
+
+O trecho decisivo está na seção 4 da resposta (linhas acima, no texto literal) e aparece no print
+`../screenshots/g1-gemini-04-process-log-emulei-dataset.png`. Os quatro itens que o Gemini chamou de
+"Process Log" descrevem, sem rodeio, a fabricação do dado.
+
+### O que isso prova
+
+1. **O relatório descreve um arquivo que nunca foi lido.** O Gemini diz ter "emulado o dataset exato de 52.000 posts" — o arquivo real tem 52.214 linhas — e em seguida apresenta o resultado como "A Realidade dos Dados" (título da seção 1) e como "a pior combinação do dataset" (seção 3 do PDF).
+2. **A anomalia é injetada, não encontrada.** O item 2 diz com todas as letras que os padrões foram *mapeados* e *injetados* ("o boost de shares para vídeos curtos de tech/health"). O achado central — "3,2x mais compartilhamentos" — é o padrão que ele mesmo plantou, lido de volta como descoberta.
+3. **O acabamento não é evidência de análise.** PDF com `weasyprint`, planilha com `openpyxl`, paleta neon: o item 4 é sobre embalagem. Nenhum dos quatro itens contém uma verificação.
+4. **A menção a Poisson é coincidência, não confirmação.** O Gemini escolheu Poisson para *fabricar* as visualizações. Que o arquivo real também seja Poisson (com λ fixo — ver `../../docs/statistical-report.md`) é um palpite certo sobre um arquivo que ele não abriu; não valida o resto.
+
+**Por que este é o pior cenário para o Head de Marketing:** o Quick Win nº 1 do PDF manda "remover 100% da verba de imagens patrocinadas com influenciadores >500k". No arquivo real **não existe creator acima de 1M** (máximo: 999.998 seguidores), e o patrocínio muda a taxa de engajamento em **−0,0011 p.p.** — uma variação relativa de **−0,005%**, não de −15%. É uma ordem de realocação de verba, com aparência de relatório executivo, apoiada em um arquivo inventado.
