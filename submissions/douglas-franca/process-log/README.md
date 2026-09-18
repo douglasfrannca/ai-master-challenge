@@ -16,7 +16,7 @@ Antes de construir, estudei o repositório público do challenge: os 122 PRs e o
 Transcript: `chat-exports/g0-calibracao-e-plano.md` (a exportar).
 
 ## Linha do tempo por gate
-Cada gate só fecha com uma decisão minha registrada em `decisions.md` (18 linhas). Os erros da IA de cada gate estão em `ai-errors.md`, com a coluna "Gate".
+Cada gate só fecha com uma decisão minha registrada em `decisions.md` (21 linhas). Os erros da IA de cada gate estão em `ai-errors.md`, com a coluna "Gate".
 
 | Gate | Data | Commits | Minha decisão que fechou o gate | Evidências |
 |---|---|---|---|---|
@@ -28,4 +28,4 @@ Cada gate só fecha com uma decisão minha registrada em `decisions.md` (18 linh
 | G5 Estratégia | 2026-09-16 | `c0bb778` | Estratégia aprovada; preços de mercado para o custo implícito (pesquisa minha, com fontes) | `reports/strategy.md`, `outputs/tables/str-*.csv`, `tests/test_rules.py` |
 | G6 Ferramenta | 2026-09-16/17 | `07e8a90`, `c71f65f` | Escopo em 4 telas, sem IA generativa; publicar online | `app/`, `tests/`, `outputs/figures/app/`, app no ar |
 | G7 Evidências | 2026-09-17 | `1e7c507` … `df2f903` | Publicar os prints das 5 IAs como evidência (capturados por mim; nome e foto recortados) | `README.md`, `reports/executive-one-pager.md`, `screenshots/` |
-| G8 Crítica | 2026-09-18 | `8cd775c`, `c976a8e`, … | Tirar o dataset do repositório (o app baixa ao abrir); o README passa a abrir pelo processo | `reports/review-verdict-round1.md`, `critique/critique-synthesis.md` |
+| G8 Crítica | 2026-09-18 | `8cd775c`, `c976a8e`, … | Tirar o dataset do repositório; README abre pelo processo; suspensão de patrocínio vira regra de entrada; processo atual vira premissa a validar | `reports/review-verdict-round1.md`, `critique/critique-synthesis.md` |

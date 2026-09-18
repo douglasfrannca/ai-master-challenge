@@ -4,6 +4,8 @@
 
 Fontes: brief do challenge; vivência de operação do Douglas (`process-log/decisions.md`, G4); lacunas do dado (`docs/gap-to-process-map.md`).
 
+> **Premissa a validar.** O brief não descreve como a operação funciona. As etapas que vêm da vivência do Douglas (contrato registrado no e-mail e no CRM, resultado reportado ao Head por relatório e dashboard) são **premissas**, confirmadas ou corrigidas na semana 1 (STR-02, reunião de origem dos dados). As que vêm do arquivo são evidência.
+
 ```mermaid
 flowchart TB
     subgraph HEAD["Head de Marketing"]
@@ -54,4 +56,4 @@ flowchart TB
 |---|---|---|
 | **A · Conteúdo orgânico** | A pauta nasce sem hipótese; formato, duração, cadência e horário não são padronizados nem registrados; o resultado vira média no dashboard | Não há como saber **o que** funcionou nem **por quê**: o arquivo não tem variação de cadência, não tem unidade de duração e não tem horário com fuso |
 | **B · Parcerias** | O gestor fecha o contrato e registra no e-mail e no CRM; o creator publica; o resultado volta como engajamento | O **custo está no CRM, mas não chega ao post**, e a **venda não é atribuída**. Sem essas duas pontas não existe retorno a calcular, só engajamento, que é igual ao orgânico |
-| **Decisão (comum)** | Relatório e dashboard com médias levam o Head a decidir pauta e verba | Sem régua prévia, sem margem de erro e sem grupo de comparação, **sempre aparece um "vencedor"**, mesmo quando é ruído (G3: 335 comparações, todas equivalentes) |
+| **Decisão (comum)** | Relatório e dashboard com médias levam o Head a decidir pauta e verba | Sem régua prévia, sem margem de erro e sem grupo de comparação, **sempre aparece um "vencedor"**, mesmo quando é ruído (G3: 332 comparações, todas equivalentes) |

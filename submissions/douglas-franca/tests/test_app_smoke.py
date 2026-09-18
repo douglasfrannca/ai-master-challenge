@@ -35,3 +35,16 @@ def test_incomplete_contract_is_blocked():
 def test_example_experiment_gets_a_decision():
     at = run_app()
     assert any("Sugestão" in m.value for m in at.markdown)
+
+
+def test_file_checked_in_tab_1_feeds_the_panel():
+    at = run_app()
+    at.radio[0].set_value("Exemplo sintético bem instrumentado (fictício)").run()
+    assert not at.exception, at.exception
+    base = at.radio[1]
+    assert len(base.options) == 2
+    base.set_value(base.options[1]).run()
+    assert not at.exception, at.exception
+    posts_metric = next(m for m in at.metric if m.label == "Posts no filtro")
+    assert posts_metric.value != "52.214"  # o painel saiu do arquivo do challenge
+    assert len(at.tabs) == 4  # as abas 3 e 4 continuam de pé

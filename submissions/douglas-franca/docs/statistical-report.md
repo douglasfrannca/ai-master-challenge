@@ -1,8 +1,10 @@
 # Relatório estatístico (G3)
 
-> **Em 3 linhas:** nos 31.214 posts de Instagram, TikTok e YouTube, **nenhuma** das 335 comparações (fatores, plataformas, patrocínio por condição, células comparáveis, perfis de audiência, hashtags) chega perto da diferença mínima que mudaria verba (±1 p.p.): todas são **EQUIVALENTES**. A maior diferença encontrada é **0,24 p.p.** e está numa célula pequena; nos fatores gerais, **0,014 p.p.** Nos fatores, o arquivo detectaria efeitos cerca de 50 vezes menores que a régua (MDE mediano 0,019 p.p.), então a ausência de efeito é **comprovada**, e não apenas "não detectada".
+> **Em 3 linhas:** nos 31.214 posts de Instagram, TikTok e YouTube, **nenhuma** das 332 comparações da taxa de engajamento (fatores, patrocínio ajustado, por condição e por célula, seguidores, perfis de audiência, hashtags) chega perto da diferença mínima que mudaria verba (±1 p.p.): todas são **EQUIVALENTES**, também com Bonferroni para as 332 e com erro agrupado por creator (`inf-robustness.csv`). Três desfechos secundários do patrocínio (share rate, comment rate, views) não têm veredito, porque a régua vale só para a taxa de engajamento; nenhum é significativo (p ≥ 0,076). A maior diferença encontrada é **0,24 p.p.** e está numa célula pequena; nos fatores gerais, **0,014 p.p.** Nos fatores, o arquivo detectaria efeitos cerca de 50 vezes menores que a régua (MDE mediano 0,019 p.p.), então a ausência de efeito é **comprovada**, e não apenas "não detectada".
 
 Reprodução: `uv run python src/analysis/run_inference.py` · Tabelas: `outputs/tables/inf-*.csv` · Resumo: `inf-summary.json`
+
+**Robustez (G8, após a crítica adversarial):** `uv run python src/analysis/robustness.py` → `inf-robustness.csv`. (1) Cada creator tem em média 6,2 posts no escopo, mas a correlação intraclasse da taxa de engajamento por creator é **−0,001** (efeito de desenho 0,99): tratar os posts como independentes não subestima o erro-padrão. (2) Com Bonferroni para as 332 comparações, o maior limite de equivalência chega a **0,78 p.p.**, ainda dentro de ±1 p.p. (3) Sem correção, o veredito se manteria com qualquer régua a partir de **0,45 p.p.**: a conclusão não depende de a régua ser exatamente ±1 p.p.
 
 ## Régua pré-registrada
 Definida pelo Douglas **antes** de qualquer teste (`process-log/decisions.md`):

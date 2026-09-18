@@ -22,6 +22,6 @@ Diagramas renderizados: `outputs/figures/g4-as-is.png`, `g4-to-be.png`, `g4-data
 | Perfil de audiência que mais engaja | Distribuição de audiência no contrato de dados (FP-07) | ✅ processo · resposta numérica no G3 |
 | O que não funciona | Regra "Parar" do ciclo de 30 dias | ✅ · lista com evidência no G3/G5 |
 | Onde concentrar esforço, **frequência**, faixa de creator | EXP-03 (cadência) + escala só com efeito replicado | ✅ processo · recomendação no G5 |
-| Política de patrocínio e threshold | Gate 1 + suspensão de contratos novos + cadastro mestre | ✅ · política no G5 |
+| Política de patrocínio e threshold | Gate 1 + regra de entrada para contratos novos + cadastro mestre | ✅ · política no G5 |
 | O que parar de fazer / quick wins | Semana 1 do plano | ✅ · consolidar no G5 |
 | Ferramenta para o dia a dia | Gate 0 (health check), Gate 1 (checagem do contrato), leituras de 15/30 dias | ⏳ construção no G6 |

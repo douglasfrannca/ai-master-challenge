@@ -23,6 +23,8 @@ POSTS_PER_CONTRACT = 10
 # Faixas de preço por post/Reels no Brasil, pesquisa de mercado trazida por Douglas em 2026-09-16
 # (jmonline.com.br, vocenohype.com.br, influee.co, stan.store). Parâmetro externo, não dado do arquivo.
 MARKET_FEES_BRL = {"micro (10–100 mil)": (500, 3_000), "grande (> 500 mil)": (15_000, 100_000)}
+MARKET_FEES_SOURCE = ("pesquisa de mercado do Douglas em 2026-09-16: jmonline.com.br, vocenohype.com.br, "
+                      "influee.co, stan.store; faixa por post/Reels no Brasil, varia por nicho, formato e uso de imagem")
 UNIT_MARGINS_BRL = [20, 50, 100]  # margem de contribuição por venda: parâmetro do negócio
 
 
@@ -48,7 +50,12 @@ def main() -> None:
         {"perfil": perfil, "fee_min_brl": lo, "fee_max_brl": hi,
          "fee_sobre_teto_engajamento_min_x": lo / best_case_value,
          "fee_sobre_teto_engajamento_max_x": hi / best_case_value,
-         **{f"vendas_para_pagar_margem_{m}_brl": f"{lo / m:,.0f}–{hi / m:,.0f}" for m in UNIT_MARGINS_BRL}}
+         # Não depende de nenhum valor escolhido para a interação: quanto cada interação extra
+         # precisaria valer para o engajamento pagar sozinho o fee de um post.
+         "valor_por_interacao_para_empatar_fee_min_brl": lo / extra_interactions_per_post,
+         "valor_por_interacao_para_empatar_fee_max_brl": hi / extra_interactions_per_post,
+         **{f"vendas_para_pagar_margem_{m}_brl": f"{lo / m:,.0f}–{hi / m:,.0f}" for m in UNIT_MARGINS_BRL},
+         "fonte": MARKET_FEES_SOURCE}
         for perfil, (lo, hi) in MARKET_FEES_BRL.items()])
     market.to_csv(TABLES / "str-market-fees.csv", index=False)
 

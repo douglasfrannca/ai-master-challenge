@@ -115,7 +115,8 @@ def main() -> None:
         "var/média: " + "; ".join(f"{m}={total.loc[m, 'var_sobre_media']:.3f} (p={total.loc[m, 'p_bicaudal_poisson']:.2f})" for m in METRICS)
         + f"; em {len(seg)} segmentos var/média entre {seg.var_sobre_media.min():.2f} e {seg.var_sobre_media.max():.2f}; "
         + "λ varia entre segmentos no máximo " + ", ".join(f"{m} {v:.2f}%" for m, v in lam_spread.items()),
-        "cada métrica é sorteada de uma Poisson com a MESMA média para todo post: nenhuma característica influencia o resultado. "
+        "cada métrica se comporta como um sorteio de Poisson com a MESMA média para todo post (inferência pela "
+        "assinatura estatística; o gerador não está disponível): nenhuma característica influencia o resultado. "
         "Contagens reais de engajamento são sobredispersas (var/média >> 1)")
 
     # Amplitude da taxa de engajamento dentro de cada segmento: sustenta a afirmação
@@ -205,7 +206,7 @@ def main() -> None:
     add("DQ-15", "MAIOR", "colunas sem coerência entre si",
         f"Cramér's V idioma×país da audiência={lang_loc.cramers_v:.3f}; posts em chinês com audiência no Brasil={zh_in_br:,}; "
         f"maior V entre os {len(ind)} pares testados={ind.cramers_v.max():.3f}",
-        "idioma, país, plataforma e categoria foram sorteados independentemente: segmentação por persona não tem base")
+        "idioma, país, plataforma e categoria não têm associação entre si: segmentação por persona não tem base")
     br = df[df.audience_location == "Brazil"]
     add("DQ-16", "INFO", "audiência Brasil",
         f"{len(br):,} posts ({len(br) / len(df):.1%}); por plataforma: "

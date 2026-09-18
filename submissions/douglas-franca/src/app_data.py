@@ -54,3 +54,26 @@ def build_posts(df: pd.DataFrame) -> pd.DataFrame:
 
 def load_posts() -> pd.DataFrame:
     return build_posts(pd.read_csv(raw_path()))
+
+
+# Nomes do contrato de dados (docs/process/06-data-contract.md) → nomes do painel.
+CONTRACT_TO_PANEL = {"format": "content_type", "comments": "comments_count"}
+
+
+def to_panel_frame(df: pd.DataFrame) -> pd.DataFrame:
+    """Prepara um arquivo enviado (formato do contrato de dados ou do challenge) para o painel.
+
+    Exige views, likes, shares e comentários; calcula a taxa de engajamento por post e a faixa de
+    seguidores quando houver `follower_count`. Posts com zero views ficam fora da taxa.
+    """
+    out = df.rename(columns={k: v for k, v in CONTRACT_TO_PANEL.items() if v not in df.columns})
+    missing = [c for c in ["views", "likes", "shares", "comments_count"] if c not in out.columns]
+    if missing:
+        raise ValueError(f"faltam as colunas de métrica: {', '.join(missing)}")
+    out = out[out.views > 0].copy()
+    out["er"] = (out.likes + out.shares + out.comments_count) / out.views * 100
+    if "tier" not in out.columns and "follower_count" in out.columns:
+        out["tier"] = pd.cut(out.follower_count, TIER_BINS, labels=TIER_LABELS, right=False).astype(str)
+    if "platform" not in out.columns:
+        out["platform"] = "sem plataforma"
+    return out

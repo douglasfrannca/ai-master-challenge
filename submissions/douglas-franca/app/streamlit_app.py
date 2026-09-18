@@ -91,48 +91,36 @@ with st.sidebar:
     st.divider()
     st.caption("Decisões de gasto e de escala são sempre humanas: a ferramenta calcula e sugere.")
 
-tab1, tab2, tab3, tab4 = st.tabs(["1 · Os dados servem?", "2 · Painel com margem de erro",
-                                  "3 · Aprovar patrocínio", "4 · Fechar ciclo de 30 dias"])
-
-# ---------------------------------------------------------------- 1. Gate 0
-with tab1:
-    st.subheader("Gate 0: este arquivo pode sustentar uma decisão?")
-    st.write("Antes de qualquer análise, a pergunta: **de onde vieram estes dados, e eles se comportam como uma "
-             "operação real?** As regras vêm da auditoria do arquivo do challenge e do contrato de dados.")
-    source = st.radio("Arquivo", ["Arquivo do challenge (52.214 posts)",
-                                  "Exemplo sintético bem instrumentado (fictício)", "Enviar meu CSV"],
-                      horizontal=True)
-    df_check = None
-    if source.startswith("Arquivo do challenge"):
-        df_check = load_posts()
-    elif source.startswith("Exemplo"):
-        df_check = pd.read_csv(ASSETS / "exemplo_sintetico_contrato_de_dados.csv")
-        st.info("Dado **fictício**, gerado para mostrar como um arquivo instrumentado passa no gate "
-                "(`scripts/build_app_assets.py`).")
-    else:
-        uploaded = st.file_uploader("CSV com colunas de métricas (views, likes, shares, comments) e, se possível, "
-                                    "as colunas do contrato de dados", type="csv")
-        if uploaded is not None:
-            df_check = pd.read_csv(uploaded)
-    if df_check is not None:
-        checks = health_check(df_check)
-        passed, msg = health_verdict(checks)
-        (st.success if passed else st.error)(msg)
-        render_checks(checks)
-
-# ---------------------------------------------------------------- 2. Painel
-with tab2:
+def render_panel() -> None:
+    """Aba 2. Função para poder encerrar cedo sem interromper as abas 3 e 4."""
     st.subheader("Painel: diferença de cada grupo contra o resto, com margem de erro")
     st.write(f"A faixa cinza é a zona **irrelevante para decisão** (±{SESOI_PP:g} p.p.). "
              "Só um intervalo que sai inteiro da faixa justifica mexer em verba. Não há ranking de médias.")
+    checked = st.session_state.get("checked")
+    bases = ["Arquivo do challenge"] + ([f"Arquivo checado na aba 1 ({checked['label']})"] if checked else [])
+    base = st.radio("Base", bases, horizontal=True,
+                    help="Envie ou escolha um arquivo na aba 1 para analisá-lo aqui. A análise usa as mesmas regras.")
+    panel, panel_platforms = posts, MAIN_PLATFORMS
+    if base != "Arquivo do challenge":
+        try:
+            panel = app_data.to_panel_frame(checked["df"])
+        except ValueError as err:
+            st.error(f"Este arquivo não pode ir para o painel: {err}.")
+            return
+        panel_platforms = sorted(panel.platform.astype(str).unique())
+        if not checked["passed"]:
+            st.warning(f"Este arquivo foi **reprovado no Gate 0** ({checked['msg']}). "
+                       "O painel mostra os números, mas eles não sustentam decisão de verba.", icon="⚠️")
+    dims = {k: v for k, v in DIMENSIONS.items() if v in panel.columns}
     c1, c2 = st.columns([2, 1])
     with c1:
-        platforms = st.multiselect("Plataformas", sorted(posts.platform.unique()), default=MAIN_PLATFORMS,
+        platforms = st.multiselect("Plataformas", sorted(panel.platform.astype(str).unique()),
+                                   default=[p for p in panel_platforms if p in set(panel.platform.astype(str))],
                                    help="Bilibili e RedNote ficam fora do escopo da empresa; disponíveis como referência.")
     with c2:
-        dim_label = st.selectbox("Comparar por", list(DIMENSIONS))
-    dim = DIMENSIONS[dim_label]
-    scope = posts[posts.platform.isin(platforms)]
+        dim_label = st.selectbox("Comparar por", list(dims))
+    dim = dims[dim_label]
+    scope = panel[panel.platform.astype(str).isin(platforms)]
     if dim == "platform" and len(platforms) < 2:
         st.warning("Escolha ao menos duas plataformas para comparar.")
     elif scope.empty:
@@ -141,6 +129,9 @@ with tab2:
         levels = [t for t in TIER_ORDER if t in set(scope[dim].astype(str))] if dim == "tier" else None
         data = scope.assign(**{dim: scope[dim].astype(str)})
         table = level_vs_rest(data, dim, levels=levels, min_n=30)
+        if table.empty:
+            st.info("Nenhum grupo tem ao menos 30 posts de cada lado para comparar. Escolha outra dimensão.")
+            return
         k1, k2, k3 = st.columns(3)
         k1.metric("Posts no filtro", f"{len(scope):,}".replace(",", "."))
         k2.metric("Taxa de engajamento média", f"{scope.er.mean():.2f}%")
@@ -181,6 +172,43 @@ with tab2:
                                     "p ajustado": st.column_config.NumberColumn(format="%.2f")})
         st.caption("p ajustado: correção de Benjamini-Hochberg para múltiplos testes. "
                    "Sem ela, ruído vira 'insight' (ex.: 'patrocínio de moda é pior').")
+
+
+tab1, tab2, tab3, tab4 = st.tabs(["1 · Os dados servem?", "2 · Painel com margem de erro",
+                                  "3 · Aprovar patrocínio", "4 · Fechar ciclo de 30 dias"])
+
+# ---------------------------------------------------------------- 1. Gate 0
+with tab1:
+    st.subheader("Gate 0: este arquivo pode sustentar uma decisão?")
+    st.write("Antes de qualquer análise, a pergunta: **de onde vieram estes dados, e eles se comportam como uma "
+             "operação real?** As regras vêm da auditoria do arquivo do challenge e do contrato de dados.")
+    source = st.radio("Arquivo", ["Arquivo do challenge (52.214 posts)",
+                                  "Exemplo sintético bem instrumentado (fictício)", "Enviar meu CSV"],
+                      horizontal=True)
+    df_check = None
+    if source.startswith("Arquivo do challenge"):
+        df_check = load_posts()
+    elif source.startswith("Exemplo"):
+        df_check = pd.read_csv(ASSETS / "exemplo_sintetico_contrato_de_dados.csv")
+        st.info("Dado **fictício**, gerado para mostrar como um arquivo instrumentado passa no gate "
+                "(`scripts/build_app_assets.py`).")
+    else:
+        uploaded = st.file_uploader("CSV com colunas de métricas (views, likes, shares, comments) e, se possível, "
+                                    "as colunas do contrato de dados", type="csv")
+        if uploaded is not None:
+            df_check = pd.read_csv(uploaded)
+    if df_check is not None:
+        checks = health_check(df_check)
+        passed, msg = health_verdict(checks)
+        (st.success if passed else st.error)(msg)
+        render_checks(checks)
+        if not source.startswith("Arquivo do challenge"):
+            st.session_state["checked"] = {"label": source, "df": df_check, "passed": passed, "msg": msg}
+            st.caption("Este arquivo fica disponível no painel da aba 2.")
+
+# ---------------------------------------------------------------- 2. Painel
+with tab2:
+    render_panel()
 
 # ---------------------------------------------------------------- 3. Gate 1
 with tab3:

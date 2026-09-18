@@ -47,7 +47,7 @@ Legenda: azul = gate automático com revisão · amarelo = decisão humana obrig
 |---|---|---|
 | **Gate 0 · Origem** | Antes de qualquer análise, a pergunta do Douglas: "de onde vocês retiraram estes dados, e de que forma?" | Sem origem documentada e health check aprovado, **não há análise**. Este arquivo de 52 mil posts seria reprovado aqui (DQ-05) |
 | **1 · Pré-registro** | Hipótese, métrica primária, régua, duração do ciclo, grupo de comparação e, em parcerias, custo total e break-even | Escrito **antes** de publicar; não pode mudar depois de ver o resultado |
-| **Gate 1 · Aprovação** | Head aprova o teste; Financeiro valida custo e break-even das parcerias | **Novos contratos de patrocínio ficam suspensos** até passarem por este gate (decisão do Douglas) |
+| **Gate 1 · Aprovação** | Head aprova o teste; Financeiro valida custo e break-even das parcerias | **Regra de entrada:** nenhum contrato novo de patrocínio é assinado sem passar por este gate (custo, cupom/UTM, grupo de comparação). Ativos seguem; exceção só com aprovação do Head, registrada. Decisão do Douglas; no G8 deixou de ser "suspensão" |
 | **2A · Conteúdo** | Briefing padronizado para Instagram, TikTok e YouTube | Toda peça registra formato, duração em segundos, tema, gancho, CTA, horário planejado |
 | **2B · Parceria** | Contrato no CRM gera `campaign_id`, cupom e UTM | Post patrocinado sem `campaign_id` não entra na leitura |
 | **4 · Coleta** | Extração automática com validação | Completude mínima de 95% dos campos do data contract; o que falha fica em quarentena |

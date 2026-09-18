@@ -10,11 +10,11 @@
 
 ## Executive Summary
 
-O problema do Head não é escolher o canal certo. É que a operação de marketing hoje **não consegue saber** qual canal, formato ou patrocínio funciona: o custo do contrato fica no CRM, o post fica na plataforma, a venda fica em outro sistema, e ninguém liga os três. Por isso a entrega principal é um **processo de decisão redesenhado**: o fluxo atual (AS-IS) com 8 pontos de falha; o fluxo novo (TO-BE) em ciclos de 15 e 30 dias; uma matriz que diz onde a IA executa, onde ela ajuda e onde só uma pessoa decide; um responsável (RACI) para cada decisão; e um contrato de dados que barra post sem custo, campanha e venda. O [**Decision Gate**](https://decision-social-doug.streamlit.app) é a ferramenta que executa esse processo.
+O problema do Head não é escolher o canal certo. É que a operação de marketing hoje **não consegue saber** qual canal, formato ou patrocínio funciona: o arquivo não tem custo, campanha nem venda, e numa operação como a que conheço o custo fica no CRM, o post na plataforma e a venda em outro sistema, sem ligação entre eles (premissa que a primeira semana confirma). Por isso a entrega principal é um **processo de decisão redesenhado**: o fluxo atual (AS-IS) com 8 pontos de falha; o fluxo novo (TO-BE) em ciclos de 15 e 30 dias; uma matriz que diz onde a IA executa, onde ela ajuda e onde só uma pessoa decide; um responsável (RACI) para cada decisão; e um contrato de dados que barra post sem custo, campanha e venda. O [**Decision Gate**](https://decision-social-doug.streamlit.app) é a ferramenta que executa esse processo.
 
-Os dados provam a necessidade. Auditei os 52.214 posts antes de analisar: views, likes, shares e comentários foram sorteados de uma distribuição de Poisson com **a mesma média para todos os posts** (variância/média entre 0,99 e 1,00). Com uma régua definida antes dos testes (±1 p.p. de taxa de engajamento), as **335 comparações** em Instagram, TikTok e YouTube deram **equivalentes**. Patrocínio empata com orgânico (−0,003 p.p.) e, no melhor cenário, gera 0,77 interação extra por post, o que cobre **menos de 1%** do fee de um micro-influenciador. Decidir com base neste arquivo é decidir com base em ruído, e foi o que 2 das 5 IAs do baseline recomendaram (uma delas mandava realocar 70% da verba).
+Os dados provam a necessidade. Auditei os 52.214 posts antes de analisar: views, likes, shares e comentários se comportam exatamente como um sorteio de Poisson com **a mesma média para todos os posts** (variância/média entre 0,99 e 1,00, em 76 segmentos). Com uma régua definida antes dos testes (±1 p.p. de taxa de engajamento), as **332 comparações** em Instagram, TikTok e YouTube deram **equivalentes**, e continuam equivalentes com correção de Bonferroni e com erro agrupado por creator ([`inf-robustness.csv`](outputs/tables/inf-robustness.csv)). Patrocínio empata com orgânico (−0,003 p.p.); para o engajamento extra pagar o fee mínimo de um micro-influenciador, cada interação precisaria valer **R$ 646**. Decidir com base neste arquivo é decidir com base em ruído, e foi o que 2 das 5 IAs do baseline recomendaram (uma delas mandava realocar 70% da verba).
 
-**Na segunda-feira:** suspender novos patrocínios, ligar o custo do CRM ao post e à venda, e decidir em ciclos de 30 dias com régua prévia.
+**Na segunda-feira:** contrato novo de patrocínio só entra medível (custo, cupom/UTM e grupo de comparação), o custo passa a ser ligado ao post e à venda, e as decisões acontecem em ciclos de 30 dias com régua prévia.
 
 ---
 
@@ -41,8 +41,8 @@ Trabalhei em **gates**: cada etapa só fecha com uma decisão minha registrada e
 | **G4 · Processo** | Que operação gera dados assim, e como consertar? | Dois fluxos (conteúdo e parcerias), 8 pontos de falha, TO-BE em ciclo de 15/30 dias, matriz de IA, RACI, contrato de dados |
 | **G5 · Estratégia** | O que fazer na segunda-feira? | 7 decisões com dono e condição de parada, custo implícito com preços de mercado, 3 testes |
 | **G6 · Ferramenta** | Como rodar isso todo dia? | Decision Gate em 4 abas, 24 testes, publicado |
-| **G7 · Evidências** | Dá para auditar como a IA foi usada? | 18 decisões minhas, 20 erros da IA registrados no momento e 46 prints das 5 IAs do baseline |
-| **G8 · Crítica adversarial** | Onde a entrega é fraca? | Um revisor calibrado nos reviews públicos do repositório reproduziu tudo do zero e apontou 5 problemas ([`review-verdict-round1.md`](reports/review-verdict-round1.md)); o que foi corrigido e como está em [`process-log/critique/`](process-log/critique/critique-synthesis.md) |
+| **G7 · Evidências** | Dá para auditar como a IA foi usada? | 21 decisões minhas, 25 erros da IA registrados no momento, 46 prints das 5 IAs do baseline e 10 da crítica |
+| **G8 · Crítica adversarial** | Onde a entrega é fraca? | Um revisor calibrado nos reviews públicos do repositório reproduziu tudo do zero e apontou 5 problemas ([`review-verdict-round1.md`](reports/review-verdict-round1.md)); o ChatGPT fez 24 apontamentos: conferi cada um, aceitei 12, respondi 3 com análise nova e mantive 9 com justificativa (o Gemini não conseguiu ler o repositório). O que foi corrigido e como está em [`process-log/critique/`](process-log/critique/critique-synthesis.md) |
 
 **Escopo:** a empresa investe em **Instagram, TikTok e YouTube**. Bilibili e RedNote (também presentes no arquivo) entram só como referência, por não alcançarem o público brasileiro.
 
@@ -65,10 +65,10 @@ Trabalhei em **gates**: cada etapa só fecha com uma decisão minha registrada e
 | Pergunta | Resposta com dados | O que fazer |
 |---|---|---|
 | **O que gera engajamento?** | Nada que o arquivo registra. 50 fatores × nível: maior diferença 0,014 p.p. (MDE 0,019) | Testar formato **dentro de cada canal** com briefing padronizado (EXP-02) |
-| **Patrocínio funciona?** | Equivalente ao orgânico: **−0,003 p.p.** (IC −0,014 a +0,008), ajustado por canal, formato, categoria, faixa, audiência e idioma, com erro agrupado por creator. Views: +0,03% no melhor caso. 23 condições e 81 células comparáveis: todas equivalentes | Suspender contratos novos até terem custo, cupom/UTM e grupo de comparação |
-| **Custo implícito?** | No melhor cenário, **0,77 interação extra por post**. A R$ 5 por interação: R$ 3,87 por post. Um micro cobra R$ 500–3.000 (**129× a 775×**); um grande, R$ 15–100 mil | Patrocínio só se paga por **venda atribuída** (ex.: fee de R$ 3.000 com margem de R$ 50 exige 60 vendas extras) |
+| **Patrocínio funciona?** | Equivalente ao orgânico: **−0,003 p.p.** (IC −0,014 a +0,008), ajustado por canal, formato, categoria, faixa, audiência e idioma, com erro agrupado por creator. Views: +0,03% no melhor caso. 23 condições e 81 células comparáveis: todas equivalentes | Contrato novo só entra com custo, cupom/UTM e grupo de comparação (regra de entrada) |
+| **Custo implícito?** | O efeito estimado é negativo; no limite superior do IC 95%, **0,77 interação extra por post**. Para pagar o fee de um micro (R$ 500–3.000 por post), cada interação precisaria valer **R$ 646 a R$ 3.876**; de um grande (R$ 15–100 mil), R$ 19 mil a R$ 129 mil | Patrocínio só se paga por **venda atribuída** (ex.: fee de R$ 3.000 com margem de R$ 50 exige 60 vendas extras) |
 | **Threshold de seguidores?** | Não existe: de 0 a 1 milhão de seguidores, **−0,001 p.p.** (IC −0,020 a +0,018) | Contratar por auditoria de audiência, fit e custo por resultado |
-| **Qual audiência engaja mais?** | Nenhuma. 160 perfis: 6 "significativos" sem correção, **menos que os 8 esperados por acaso**; 0 com correção | Registrar a distribuição real de audiência por post |
+| **Qual audiência engaja mais?** | Nenhuma. 160 perfis: 6 "significativos" sem correção, **compatível com o acaso** (≈ 8 esperados a 5%); 0 com correção | Registrar a distribuição real de audiência por post |
 | **O que NÃO funciona?** | Ranking de médias; contratar por seguidores; engajamento ÷ seguidores (artefato 1/x); otimizar hashtags (93 mil pares, nenhum com mais de 5 posts); p < 0,05 sem correção ("moda é pior" e "#religious é melhor" somem); modelo preditivo (R² = −0,001) | Parar essas práticas |
 | **Frequência?** | Não testável: cadência fixa no arquivo | Rollout escalonado no 2º ciclo (EXP-03) |
 
@@ -97,7 +97,7 @@ Trabalhei em **gates**: cada etapa só fecha com uma decisão minha registrada e
 
 | Prioridade | Decisão | Dono |
 |---|---|---|
-| **P0 · semana 1** | Suspender novos contratos de patrocínio | Head de Marketing |
+| **P0 · semana 1** | Regra de entrada: nenhum contrato novo de patrocínio sem custo, cupom/UTM e grupo de comparação (ativos seguem; exceção só com aprovação do Head) | Head de Marketing |
 | **P0 · semana 1** | Auditar a origem dos dados (quem extraiu, de onde, como) | Head + AI Master |
 | **P0 · semanas 1–2** | Ligar o custo do CRM ao post e à venda: `campaign_id`, cupom e UTM por contrato | Gestor de Parcerias |
 | **P0 · dias 8–15** | Ativar o contrato de dados e o cadastro mestre de creators | AI Master |
@@ -105,12 +105,12 @@ Trabalhei em **gates**: cada etapa só fecha com uma decisão minha registrada e
 | **P1 · imediato** | Dashboard com n e margem de erro; fim do ranking de médias | AI Master |
 | **P2 · dias 31–90** | Mudar verba só com efeito replicado em 2 ciclos e retorno acima do break-even | Head + Financeiro |
 
-**Quick wins desta semana:** reunião de origem dos dados · comunicado de suspensão · lista de contratos ativos sem custo · cupom e UTM para os ativos · selo de margem de erro no dashboard.
+**Quick wins desta semana:** reunião de origem dos dados · comunicado da regra de entrada · lista de contratos ativos sem custo · cupom e UTM para os ativos · selo de margem de erro no dashboard.
 
 Detalhes, KPIs e condições de parada: [`reports/strategy.md`](reports/strategy.md).
 
 ### Limitações
-- As conclusões valem **para este arquivo**, que foi gerado por sorteio. Elas não dizem que patrocínio, formatos ou canais não funcionam no mundo real; dizem que **este registro não permite saber**.
+- As conclusões valem **para este arquivo**, que tem a assinatura de um sorteio. Elas não dizem que patrocínio, formatos ou canais não funcionam no mundo real; dizem que **este registro não permite saber**.
 - O arquivo não traz custo nem venda. O custo implícito usa o melhor cenário estatístico e faixas de preço de mercado (pesquisa com fontes), não contratos reais.
 - O valor de uma interação, a margem por venda e o desvio real da taxa de engajamento são **parâmetros de negócio**, apresentados em cenários.
 - As causas operacionais do AS-IS combinam evidência do arquivo, minha vivência de operação e hipóteses marcadas como tal; precisam ser validadas com o time.
@@ -164,8 +164,9 @@ Tudo abaixo está registrado, com data e alternativa rejeitada, em [`process-log
 - **Recorte pelo negócio:** Bilibili e RedNote não alcançam o público brasileiro; a estratégia é para os três canais da empresa.
 - **A régua antes do teste:** a decisão de verba muda com ±1 p.p. de taxa de engajamento, e só com ela.
 - **O que eu diria ao Head na segunda-feira:** "Os dados que você me enviou não servem para tomarmos uma decisão. Me explique de onde vocês retiraram estes dados. Vamos verificar os contratos sem custo e suspender novos patrocínios, medir custo contra vendas de cada contrato, analisar a cada 15 dias e fechar um ciclo a cada 30."
-- **Como a operação funciona de verdade:** o gestor de parcerias fecha o contrato, que fica no e-mail e no CRM; o resultado chega por relatório e dashboard. Isso mudou o diagnóstico: o custo existe, mas **não chega ao post**.
+- **Como a operação funciona, pela minha experiência:** o gestor de parcerias fecha o contrato, que fica no e-mail e no CRM; o resultado chega por relatório e dashboard. Isso mudou o diagnóstico: o custo existe, mas **não chega ao post**. O brief não descreve a operação, então isso entra no AS-IS como **premissa a validar na semana 1**.
 - **Não perder o brief de vista:** exigi que conteúdo orgânico e parcerias tivessem o mesmo peso no processo.
+- **Depois da crítica adversarial (G8):** tirei o dataset do repositório; o README passou a abrir pelo processo; a suspensão de patrocínios virou **regra de entrada** (contrato novo só se nascer medível, exceção só com aprovação do Head), porque suspender seria uma decisão que o próprio arquivo não sustenta; e o processo atual passou a ser tratado como premissa a validar.
 - **Preço de mercado:** trazer os fees reais de influenciadores transformou "o engajamento não paga" numa conta concreta.
 
 ---
@@ -188,6 +189,7 @@ uv run python scripts/download_data.py        # dataset do Kaggle, sem login
 uv run python src/audit/verify_baseline_claims.py
 uv run python src/audit/run_audit.py
 uv run python src/analysis/run_inference.py
+uv run python src/analysis/robustness.py
 uv run python src/analysis/implied_cost.py
 uv run pytest
 uv run streamlit run app/streamlit_app.py

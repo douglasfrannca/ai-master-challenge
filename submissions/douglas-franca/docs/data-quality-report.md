@@ -1,6 +1,6 @@
 # Relatório de qualidade dos dados (G2)
 
-> **Em 3 linhas:** o arquivo está íntegro no formato, mas **não descreve uma operação real**. Views, likes, shares e comentários foram sorteados de uma distribuição de Poisson com **a mesma média para todos os 52.214 posts**, e as demais colunas foram sorteadas de forma independente. Por isso nenhuma característica de post, creator, audiência ou patrocínio pode explicar resultado; qualquer "insight" de performance extraído deste arquivo é ruído.
+> **Em 3 linhas:** o arquivo está íntegro no formato, mas **não descreve uma operação real**. Views, likes, shares e comentários se comportam exatamente como um sorteio de Poisson com **a mesma média para todos os 52.214 posts**, e as demais colunas não têm associação entre si. Sem acesso ao gerador, isto é inferência pela assinatura estatística, não prova de origem; mas nenhuma operação real produz essa assinatura. Por isso nenhuma característica de post, creator, audiência ou patrocínio pode explicar resultado; qualquer "insight" de performance extraído deste arquivo é ruído.
 
 Reprodução: `uv run python src/audit/run_audit.py`. Tabelas em `outputs/tables/dq-*.csv`.
 

@@ -88,4 +88,4 @@ erDiagram
 | `creator_id` com mais de um handle na mesma plataforma | 0 | revisão do cadastro |
 | `published_at` sem fuso | 0 | quarentena |
 
-Estas regras rodam na ferramenta (G6, módulo "Health check"). **O arquivo do challenge seria reprovado em todas:** não tem origem, não tem posts com zero, não tem sobredispersão (DQ-05), não tem correlação likes × views (DQ-06), tem creators com vários nomes (DQ-07), e os campos de campanha, fuso e distribuição de audiência nem existem nele.
+Estas regras rodam na ferramenta (G6, módulo "Health check"). **O arquivo do challenge é reprovado em 9 das 11 regras** (`src/audit/health.py`): não tem origem, não tem posts com zero, não tem sobredispersão (DQ-05), não tem correlação likes × views (DQ-06), tem creators com vários nomes (DQ-07), e os campos de campanha, fuso e distribuição de audiência nem existem nele.
