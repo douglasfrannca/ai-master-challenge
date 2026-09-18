@@ -1,6 +1,7 @@
 # Dados brutos: baixar com scripts/download_data.py
 data/
 *.csv.gz
+*.parquet
 
 # Ambiente Python
 .venv/

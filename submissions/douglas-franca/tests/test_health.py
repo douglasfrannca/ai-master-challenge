@@ -4,6 +4,7 @@ import numpy as np
 import pandas as pd
 import pytest
 
+from src import app_data
 from src.audit.health import health_check, verdict
 from src.decision.rules import sales_to_break_even
 
@@ -38,8 +39,8 @@ def test_instrumented_example_is_approved():
     assert ok, message
 
 
-def test_real_challenge_asset_is_rejected():
-    ok, _ = verdict(health_check(pd.read_parquet(ASSETS / "posts.parquet")))
+def test_real_challenge_file_is_rejected():
+    ok, _ = verdict(health_check(app_data.load_posts()))
     assert not ok
 
 

@@ -1,10 +1,12 @@
-"""Gera os arquivos que o Decision Gate usa (app/assets/).
+"""Gera os exemplos fictícios que o Decision Gate usa (app/assets/).
 
-1. posts.parquet: colunas do dataset do challenge necessárias ao painel (derivado, compacto).
-2. exemplo_sintetico_contrato_de_dados.csv: dado FICTÍCIO no formato do contrato de dados (G4),
+O dataset do challenge NÃO é versionado: o app o carrega por src/app_data.py
+(data/raw/ local ou download do Kaggle na primeira abertura).
+
+1. exemplo_sintetico_contrato_de_dados.csv: dado FICTÍCIO no formato do contrato de dados (G4),
    gerado com variação realista (cauda longa, zeros, likes acompanhando views). Serve só para
    mostrar que o Gate 0 aprova um arquivo bem instrumentado. Não é dado real.
-3. exemplo_sintetico_resultado_teste.csv: resultado FICTÍCIO de um teste de 30 dias (dois braços).
+2. exemplo_sintetico_resultado_teste.csv: resultado FICTÍCIO de um teste de 30 dias (dois braços).
 
 Uso: uv run python scripts/build_app_assets.py
 """
@@ -15,38 +17,8 @@ import numpy as np
 import pandas as pd
 
 ROOT = Path(__file__).resolve().parents[1]
-RAW = ROOT / "data" / "raw" / "social_media_dataset.csv"
 ASSETS = ROOT / "app" / "assets"
-TIER_BINS = [0, 10_000, 50_000, 100_000, 500_000, np.inf]
-TIER_LABELS = ["<10K", "10–50K", "50–100K", "100–500K", "500K–1M"]
 PLATFORMS = ["Instagram", "TikTok", "YouTube"]
-
-
-def build_posts() -> pd.DataFrame:
-    df = pd.read_csv(RAW)
-    out = pd.DataFrame({
-        "platform": df.platform,
-        "content_type": df.content_type,
-        "content_category": df.content_category,
-        "tier": pd.cut(df.follower_count, TIER_BINS, labels=TIER_LABELS, right=False).astype(str),
-        "is_sponsored": df.is_sponsored,
-        "disclosure_type": df.disclosure_type,
-        "audience_age": df.audience_age_distribution,
-        "audience_gender": df.audience_gender_distribution,
-        "audience_location": df.audience_location,
-        "creator_id": df.creator_id,
-        "creator_name": df.creator_name,
-        "post_date": df.post_date,
-        "views": df.views.astype("int32"),
-        "likes": df.likes.astype("int32"),
-        "shares": df.shares.astype("int32"),
-        "comments_count": df.comments_count.astype("int32"),
-    })
-    out["er"] = (out.likes + out.shares + out.comments_count) / out.views * 100
-    for col in ["platform", "content_type", "content_category", "tier", "disclosure_type",
-                "audience_age", "audience_gender", "audience_location"]:
-        out[col] = out[col].astype("category")
-    return out
 
 
 def build_contract_example(rng: np.random.Generator, n: int = 3_000) -> pd.DataFrame:
@@ -98,8 +70,6 @@ def build_experiment_example(rng: np.random.Generator, n_per_arm: int = 400) -> 
 def main() -> None:
     ASSETS.mkdir(parents=True, exist_ok=True)
     rng = np.random.default_rng(2026)
-    posts = build_posts()
-    posts.to_parquet(ASSETS / "posts.parquet", index=False, compression="zstd")
     build_contract_example(rng).to_csv(ASSETS / "exemplo_sintetico_contrato_de_dados.csv", index=False)
     build_experiment_example(rng).to_csv(ASSETS / "exemplo_sintetico_resultado_teste.csv", index=False)
     for f in sorted(ASSETS.iterdir()):

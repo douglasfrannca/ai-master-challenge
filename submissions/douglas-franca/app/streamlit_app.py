@@ -25,6 +25,7 @@ from src.decision.rules import (  # noqa: E402
     sample_size_per_arm,
 )
 from src.decision.stats import VERDICT_HELP, level_vs_rest  # noqa: E402
+from src import app_data  # noqa: E402
 
 ASSETS = Path(__file__).resolve().parent / "assets"
 MAIN_PLATFORMS = ["Instagram", "TikTok", "YouTube"]
@@ -46,9 +47,9 @@ VERDICT_ICON = {"EQUIVALENTE": "⚪", "DIFERENTE, MAS IRRELEVANTE": "🟡", "DIF
 st.set_page_config(page_title="Decision Gate · Social Media", page_icon="🚦", layout="wide")
 
 
-@st.cache_data
+@st.cache_data(show_spinner="Carregando os 52.214 posts do challenge (na primeira abertura, o download leva alguns segundos)...")
 def load_posts() -> pd.DataFrame:
-    return pd.read_parquet(ASSETS / "posts.parquet")
+    return app_data.load_posts()
 
 
 @st.cache_data

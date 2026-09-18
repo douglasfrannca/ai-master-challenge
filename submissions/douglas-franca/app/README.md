@@ -17,8 +17,7 @@ Não usa API de IA: funciona sem chave e sem custo.
 ```bash
 cd submissions/douglas-franca
 uv sync
-uv run python scripts/download_data.py      # só para regenerar os assets
-uv run python scripts/build_app_assets.py   # opcional: os assets já estão versionados
+uv run python scripts/download_data.py      # opcional: sem ele, o app baixa o dataset ao abrir
 uv run streamlit run app/streamlit_app.py
 ```
 
@@ -29,9 +28,11 @@ uv run streamlit run app/streamlit_app.py
 4. **Advanced settings:** Python 3.12. As dependências vêm de `app/requirements.txt`.
 5. Health check: `https://<app>.streamlit.app/healthz` responde `{"status":"ok"}`.
 
+## De onde vêm os dados
+O dataset do challenge **não é versionado**. `src/app_data.py` usa `data/raw/` se o arquivo já foi baixado; senão baixa do Kaggle na primeira abertura (`kagglehub`, sem login, ~5 s a frio) e guarda em cache. O mesmo arquivo alimenta a análise, então o painel mostra exatamente os números dos relatórios.
+
 ## Arquivos em `assets/`
 | Arquivo | Origem |
 |---|---|
-| `posts.parquet` | Colunas do dataset do challenge usadas pelo painel (derivado; 1,4 MB) |
 | `exemplo_sintetico_contrato_de_dados.csv` | **Fictício.** Mostra um arquivo instrumentado que passa no Gate 0 |
 | `exemplo_sintetico_resultado_teste.csv` | **Fictício.** Resultado de um teste de dois braços para a aba 4 |
