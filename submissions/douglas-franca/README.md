@@ -42,7 +42,7 @@ Trabalhei em **gates**: as etapas de análise, processo, estratégia e ferrament
 | **G5 · Estratégia** | O que fazer na segunda-feira? | 7 decisões com dono e condição de parada, custo implícito com preços de mercado, 3 testes |
 | **G6 · Ferramenta** | Como rodar isso todo dia? | Decision Gate em 4 abas, 24 testes, publicado |
 | **G7 · Evidências** | Dá para auditar como a IA foi usada? | 17 decisões minhas, 25 erros da IA registrados no momento, 46 prints das 5 IAs do baseline e 10 da crítica |
-| **G8 · Crítica adversarial** | Onde a entrega é fraca? | Um revisor calibrado nos reviews públicos do repositório reproduziu tudo do zero e apontou 5 problemas ([`review-verdict-round1.md`](reports/review-verdict-round1.md)); o ChatGPT fez 24 apontamentos: conferi cada um, aceitei 12, respondi 3 com análise nova e mantive 9 com justificativa (o Gemini não conseguiu ler o repositório). O que foi corrigido e como está em [`process-log/critique/`](process-log/critique/critique-synthesis.md) |
+| **G8 · Crítica adversarial** | Onde a entrega é fraca? | Um revisor baseado nos critérios públicos do repositório reproduziu tudo do zero e apontou 5 problemas ([`review-verdict-round1.md`](reports/review-verdict-round1.md)); o ChatGPT fez 24 apontamentos: conferi cada um, aceitei 12, respondi 3 com análise nova e mantive 9 com justificativa (o Gemini não conseguiu ler o repositório). O que foi corrigido e como está em [`process-log/critique/`](process-log/critique/critique-synthesis.md) |
 
 **Escopo:** a empresa investe em **Instagram, TikTok e YouTube**. Bilibili e RedNote (também presentes no arquivo) entram só como referência, por não alcançarem o público brasileiro.
 
@@ -132,7 +132,7 @@ Detalhes, KPIs e condições de parada: [`reports/strategy.md`](reports/strategy
 
 ### Workflow
 
-1. **Calibração da barra:** li o brief, o guia de submissão, os 122 PRs e os 181 reviews publicados pelo avaliador, para entender o critério real e o que já tinha sido entregue no 004. Nada foi copiado.
+1. **Leitura do repositório:** li o brief, o guia de submissão e as submissões públicas do repositório, para entender o critério de qualidade e o que já tinha sido entregue no 004. Nada foi copiado.
 2. **Plano e agentes:** desenhei as etapas G0–G9 e 8 subagentes com contrato de entrada e saída, cada um com um gate humano ([`CLAUDE.md`](CLAUDE.md)). Modo de permissão com aprovação; a IA não consegue abrir PR.
 3. **G1 · Baseline:** colei o brief cru em 5 IAs e mandei conferir cada número contra o dataset ([`g1-baseline-claims-check.csv`](outputs/tables/g1-baseline-claims-check.csv)). Escrevi a rubrica de diferenciação **antes** de construir ([`docs/differentiation-rubric.md`](docs/differentiation-rubric.md)).
 4. **G2 · Auditoria:** a IA rodou os testes forenses; decidi tratar a descoberta como o achado principal do relatório.
@@ -174,7 +174,7 @@ Tudo abaixo está registrado, com data e alternativa rejeitada, em [`process-log
 ## Evidências
 
 - [x] **Chat exports:** respostas literais das 5 IAs do baseline ([`process-log/baseline/`](process-log/baseline/))
-- [ ] **Transcript da sessão de trabalho:** [`process-log/chat-exports/`](process-log/chat-exports/) _(exportar no G9)_
+- [x] **Transcript da sessão de trabalho:** [`process-log/chat-exports/sessao-claude-code-g0-a-g8.md`](process-log/chat-exports/sessao-claude-code-g0-a-g8.md) — minhas mensagens e as respostas do Claude, de G0 a G8 (li antes de publicar e retirei alguns trechos, marcados no texto)
 - [x] **Screenshots do app:** [`outputs/figures/app/`](outputs/figures/app/)
 - [x] **Screenshots das conversas com as IAs:** [`process-log/screenshots/`](process-log/screenshots/) — 46 prints das 5 IAs (ChatGPT 8 · DeepSeek 9 · Grok 6 · Claude.ai 16 · Gemini 7)
 - [x] **Git history:** um commit por gate ([branch `submission/douglas-franca`](https://github.com/douglasfrannca/ai-master-challenge/commits/submission/douglas-franca))

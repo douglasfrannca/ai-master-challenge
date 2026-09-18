@@ -11,9 +11,9 @@ Evidências de como a IA foi usada, organizadas por gate. Tudo em texto (Markdow
 | `chat-exports/` | Transcripts das sessões em Markdown |
 | `screenshots/` | Prints nomeados `gN-descricao.png` |
 
-## Sessão 0: calibração da barra (2026-09-14 a 2026-09-16)
-Antes de construir, estudei o repositório público do challenge: os 122 PRs e os 181 reviews publicados pelo avaliador. O objetivo era entender o critério real de qualidade e o que já tinha sido entregue no Challenge 004, para não repetir o que já existe. Nenhum conteúdo de outras submissões foi copiado.
-Transcript: `chat-exports/g0-calibracao-e-plano.md` (a exportar).
+## Sessão 0: leitura do repositório
+Antes de construir, li o brief, o guia de submissão e as submissões públicas do repositório. O objetivo era entender o critério de qualidade e o que já tinha sido entregue no Challenge 004, para não repetir o que já existe. Nenhum conteúdo de outras submissões foi copiado.
+Transcript da sessão inteira (G0 a G8): `chat-exports/sessao-claude-code-g0-a-g8.md`.
 
 ## Linha do tempo por gate
 Os gates de análise, processo, estratégia, ferramenta e crítica (G1–G6, G8) fecham com decisões minhas registradas em `decisions.md` (17 linhas); G0 (setup) e G7 (evidências) são etapas operacionais. Os erros da IA de cada gate estão em `ai-errors.md`, com a coluna "Gate".

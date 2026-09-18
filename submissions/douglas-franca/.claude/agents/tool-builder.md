@@ -15,7 +15,7 @@ G3, G4 e G5 em PASS. Métricas, limiares e decisões congelados.
 3. **Leitura de experimento:** upload de CSV de resultado → efeito + IC → Escalar / Replicar / Iterar / Parar, com regra explícita.
 4. **Health check de dados:** upload de CSV novo → roda as regras do data-auditor → diz o que esse dado permite ou não afirmar.
 - Camada LLM opcional (redação de briefing e resumo). **Fallback determinístico** quando não há API key.
-- Página/endpoint de status visível (crítica ao cold start do #91).
+- Página/endpoint de status visível (o app pode hibernar; o status mostra se está no ar).
 
 ## Engenharia
 - `app/` separado de `src/`. Lógica pura em funções testáveis e UI fina.

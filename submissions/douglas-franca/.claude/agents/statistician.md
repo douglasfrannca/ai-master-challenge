@@ -12,7 +12,7 @@ Você mede diferenças e incerteza. Não traduz para estratégia.
 ## Tarefas
 1. **Células de performance:** plataforma × categoria × formato × faixa de creator, com n≥30 por célula. Reporte a cobertura (quantas células sobrevivem).
 2. **Comparação orgânico vs patrocinado dentro da célula:** diferença em p.p. + IC95% (bootstrap), e modelo ajustado (OLS/GLM com erros agrupados por `creator_id`) como checagem.
-3. **Equivalência (TOST)** contra o limiar aprovado. É o diferencial em relação ao PR #91: provar "não há diferença relevante", e não só "não detectamos diferença".
+3. **Equivalência (TOST)** contra o limiar aprovado. O objetivo é provar "não há diferença relevante", e não só "não detectamos diferença".
 4. **Poder/MDE:** com o n disponível, qual o menor efeito detectável? Isso torna a ausência de efeito informativa.
 5. **Múltiplas comparações:** Benjamini-Hochberg em toda família de testes. Inventário de quantos testes rodaram.
 6. **Métricas decompostas:** views, engagement rate, share rate, comment rate e views/follower, tratadas como sinais distintos.

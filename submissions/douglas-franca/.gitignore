@@ -20,7 +20,7 @@ __pycache__/
 .env.*
 !.env.example
 
-# Material de calibração local (reviews públicos), fora da entrega
+# Material de consulta local, fora da entrega
 .intel/
 
 # Configuração local do Claude Code

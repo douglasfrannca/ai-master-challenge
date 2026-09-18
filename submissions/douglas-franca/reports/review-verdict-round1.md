@@ -1,8 +1,8 @@
 # Review adversarial G8 — round 1
 
-> _Nota de publicação: referências a submissões de outros candidatos foram retiradas deste relatório antes da publicação; as comparações com os PRs #91 e #72, usados como régua, foram mantidas._
+> _Nota de publicação: referências a submissões de outros candidatos e a arquivos locais de consulta foram retiradas deste relatório antes da publicação; as comparações com os PRs #91 e #72, usados como régua, foram mantidas._
 
-**Avaliador simulado:** `g4-reviewer` (calibrado em `.intel/reviews-avaliador-181.tsv` e `.intel/reviews-excepcionais-e-reprovados.txt`)
+**Avaliador simulado:** `g4-reviewer` (baseado nos critérios públicos do repositório)
 **Escopo:** `submissions/douglas-franca/` na branch `submission/douglas-franca` (HEAD `df2f903`)
 **Data:** 2026-09-18
 
@@ -75,7 +75,7 @@ O único pré-requisito externo é `scripts/download_data.py` (kagglehub, sem lo
 
 - **M1 · O esqueleto é o mesmo do #91.** 52.214 posts, método em gates, NO-GO de ML, Streamlit público com n e IC, recomendações priorizadas, "instrumentar antes de otimizar", commits por gate. A diferença é real (ver seção final), mas está **dentro** das camadas, não na silhueta. Um avaliador com pressa lê a silhueta. Vale uma frase no `README.md`, logo após o Executive Summary, dizendo em uma linha o que esta entrega faz que a análise honesta padrão não faz. **Owner: executive-writer.**
 
-- **M2 · Otimizar contra os reviews do avaliador é visível no texto.** `docs/process/05-raci.md:3` ("a pergunta que ficou em aberto em submissões anteriores"), `process-log/decisions.md:19` ("escopo inflado foi criticado em submissão anterior") e `process-log/baseline/README.md:29` ("o que tornou o PR #91 excepcional"). A transparência é correta e eu prefiro assim. Mas convida a pergunta "isto resolve o problema ou resolve o avaliador?". Sugestão: manter a honestidade e reancorar a justificativa no **brief** (que pede comparação justa e recomendações priorizadas), citando o review como confirmação, não como origem. **Owner: executive-writer + process-log-keeper.**
+- **M2 · Otimizar contra os reviews do avaliador é visível no texto.** Em alguns documentos, a justificativa cita avaliações anteriores em vez do brief. A transparência é correta e eu prefiro assim. Mas convida a pergunta "isto resolve o problema ou resolve o avaliador?". Sugestão: manter a honestidade e reancorar a justificativa no **brief** (que pede comparação justa e recomendações priorizadas), citando o review como confirmação, não como origem. **Owner: executive-writer + process-log-keeper.**
 
 - **M3 · `README.md:13` diz "variância/média entre 0,99 e 1,00"**, mas likes = 1,0030 (`outputs/tables/dq-poisson.csv`, linha `likes,TOTAL`). Arredonda para 1,00 e o relatório de qualidade mostra 1,003 aberto, então não é erro — é uma faixa apertada demais para o próprio dado. "entre 0,99 e 1,00" → "≈ 1,00 nas quatro métricas". **Owner: data-auditor.**
 

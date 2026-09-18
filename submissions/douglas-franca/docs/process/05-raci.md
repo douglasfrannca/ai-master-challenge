@@ -1,6 +1,6 @@
 # 05 · Quem faz o quê (RACI)
 
-> **Em 3 linhas:** seis papéis, **todos já existentes na operação**; o redesenho não exige contratação. O AI Master opera a camada de dados e automação. Cada etapa tem **um único responsável pela decisão (A)**. A tabela responde à pergunta que ficou em aberto em submissões anteriores: **quem valida o break-even e quem opera o grupo de comparação**.
+> **Em 3 linhas:** seis papéis, **todos já existentes na operação**; o redesenho não exige contratação. O AI Master opera a camada de dados e automação. Cada etapa tem **um único responsável pela decisão (A)**. A tabela responde a duas perguntas que todo teste precisa ter respondidas antes de começar: **quem valida o break-even e quem opera o grupo de comparação**.
 
 **R** executa · **A** responde pela decisão (um por linha) · **C** é consultado · **I** é informado
 

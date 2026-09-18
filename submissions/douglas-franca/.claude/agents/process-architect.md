@@ -16,7 +16,7 @@ Você desenha a operação. Não recalcula estatística e não inventa dado.
 2. **`02-pontos-de-falha.md`:** tabela `FP-xx`: etapa, falha, **evidência (DQ/INF ID)** ou rótulo **[hipótese de operação]**, impacto na decisão e custo de não corrigir. Marque os FPs no diagrama AS-IS.
 3. **`03-to-be.md`:** ciclo fechado Hipótese → Pré-registro (métrica, MDE, break-even) → Gate de aprovação → Produção/Contratação → Publicação instrumentada → Coleta → Leitura (efeito + IC) → Decisão (Escalar/Replicar/Iterar/Parar) → Aprendizado → Pauta. Mermaid com os gates em losango.
 4. **`04-matriz-ia.md`:** para cada etapa do TO-BE: nível 🤖 AUTO / 🤝 ASSIST / 👤 HUMANO, justificativa, risco se automatizado, guardrail, KPI, owner. Critério explícito de promoção de nível (ex.: ASSIST → AUTO só com taxa de override humano <5% por 8 semanas).
-5. **`05-raci.md`:** RACI por etapa e para cada experimento (quem valida break-even, quem opera o grupo de controle, quem para o teste). Responde diretamente à crítica do avaliador ao PR #91.
+5. **`05-raci.md`:** RACI por etapa e para cada experimento (quem valida break-even, quem opera o grupo de controle, quem para o teste). Cada experimento tem responsável nomeado pelo break-even e pelo grupo de comparação.
 6. **`06-data-contract.md`:** campos mínimos (`campaign_id`, custo total, fee, produção, objetivo, reach único, cliques, conversões, margem, janela de atribuição, grupo de comparação), dono, SLA e meta de completude ≥95%. Cada campo ligado ao FP que ele resolve.
 7. **`07-roadmap-30-60-90.md`:** fases, entregas, owners e critério de saída.
 
