@@ -1,5 +1,7 @@
 # Review adversarial G8 — round 1
 
+> _Nota de publicação: referências a submissões de outros candidatos foram retiradas deste relatório antes da publicação; as comparações com os PRs #91 e #72, usados como régua, foram mantidas._
+
 **Avaliador simulado:** `g4-reviewer` (calibrado em `.intel/reviews-avaliador-181.tsv` e `.intel/reviews-excepcionais-e-reprovados.txt`)
 **Escopo:** `submissions/douglas-franca/` na branch `submission/douglas-franca` (HEAD `df2f903`)
 **Data:** 2026-09-18
@@ -10,7 +12,7 @@
 
 A submissão faz o que o PR #91 fez e vai além em quatro frentes verificáveis: **prova o mecanismo** do "sem sinal" (Poisson com λ fixo, não só "dataset sintético"), **pré-registra a régua** e conclui por **equivalência** em vez de ausência de significância, **mede a IA contra si mesma** (5 baselines com as 19 afirmações conferidas por código) e **reproduz byte a byte** a partir de um checkout limpo. O ponto mais forte não é estatístico: é que a entrega responde "qual falha de processo gerou esta lacuna e quem conserta na segunda-feira", com matriz AUTO/ASSIST/HUMANO, regra de promoção de nível e RACI com um único responsável por decisão.
 
-Não segura a aprovação. Mas o process log anuncia três buracos que ele mesmo não fechou, um número de doc não passa na conferência, e 52.214 linhas do dataset do challenge estão versionadas em `.parquet` — exatamente a classe de coisa que este avaliador já reprovou por hygiene (PR #96) e por process log incompleto (PR #103). São correções de minutos; deixá-las é regalar o único ângulo de ataque que a submissão tem.
+Não segura a aprovação. Mas o process log anuncia três buracos que ele mesmo não fechou, um número de doc não passa na conferência, e 52.214 linhas do dataset do challenge estão versionadas em `.parquet` — dois motivos de reprovação que aparecem nos reviews públicos do repositório (higiene e process log incompleto). São correções de minutos; deixá-las é regalar o único ângulo de ataque que a submissão tem.
 
 ## Bloqueadores B1–B9: **nenhum**
 
@@ -20,7 +22,7 @@ Não segura a aprovação. Mas o process log anuncia três buracos que ele mesmo
 | B2 | `git ls-files submissions/douglas-franca \| grep -E 'venv\|pycache\|pytest_cache\|pkl'` → vazio; `.gitignore` presente (`submissions/douglas-franca/.gitignore:1-33`) bloqueia `data/`, `.venv/`, `.intel/`, `*.pkl` | **PASS com ressalva** (ver C4) |
 | B3 | `find process-log -type f` → só `.md` e `.png`; zero PDF/DOCX | **PASS** |
 | B4 | 48 PNGs (`ls process-log/screenshots/*.png \| wc -l` → 48) + 5 baselines literais em texto + narrativa (`decisions.md`, `ai-errors.md`). O guia aceita "escolha um ou combine" (`submission-guide.md:22`) | **PASS** (ver C1) |
-| B5 | 16 commits, um por gate, máx. 31 arquivos num commit (`git log --format=%h main..HEAD \| tail -r \| while read c; do git show --name-only --format= $c \| grep -c .; done`). Referência: #91 aprovado com 19 commits; #103 reprovado com 229 arquivos em 1 commit | **PASS** |
+| B5 | 16 commits, um por gate, máx. 31 arquivos num commit (`git log --format=%h main..HEAD \| tail -r \| while read c; do git show --name-only --format= $c \| grep -c .; done`). Referência: #91 aprovado com 19 commits | **PASS** |
 | B6 | 30+ afirmações numéricas conferidas contra `outputs/tables/` e contra execução do código. 1 erro encontrado, não decisório (ver C3) | **PASS com ressalva** |
 | B7 | Nenhuma diferença irrelevante vendida como insight; a submissão faz o oposto de forma sistemática (`docs/statistical-report.md:47` desmonta "moda é o pior patrocinador"; `:67` desmonta `#religious`) | **PASS** |
 | B8 | `.claude/settings.json` nega `Bash(gh pr create:*)` e `gh pr merge`; `CLAUDE.md:7-9` exige aprovação por edição; `decisions.md` traz 14 decisões nas palavras literais do Douglas, com alternativa rejeitada | **PASS** |
@@ -53,7 +55,7 @@ O único pré-requisito externo é `scripts/download_data.py` (kagglehub, sem lo
 
 3. **A IA auditada por código, não por impressão** — `process-log/baseline/README.md` + `outputs/tables/g1-baseline-claims-check.csv`. A execução confirma o que o doc afirma: a célula "3,2x" do Gemini tem **n=5 e razão 1,02x** ("teto real 1.02x" na saída de `verify_baseline_claims.py`); a "vantagem nano 51,7%" do Grok é artefato 1/x. Nenhuma outra submissão do repositório mediu o baseline e o desmontou numericamente. **Owner: data-auditor + process-log-keeper.**
 
-4. **Lacuna do dado → falha de processo → dono** — `docs/gap-to-process-map.md:9-20` liga cada DQ a um FP com rótulo **[evidência] / [hipótese]** explícito, e `docs/process/02-pontos-de-falha.md` distingue **[dado] / [operação] / [hipótese]**. Essa disciplina de procedência é o que fez o PR #104 ser "Excepcional" ("procedência marcada em cada insumo"). **Owner: process-architect.**
+4. **Lacuna do dado → falha de processo → dono** — `docs/gap-to-process-map.md:9-20` liga cada DQ a um FP com rótulo **[evidência] / [hipótese]** explícito, e `docs/process/02-pontos-de-falha.md` distingue **[dado] / [operação] / [hipótese]**. Essa disciplina de procedência aparece entre os critérios de "Excepcional" nos reviews públicos. **Owner: process-architect.**
 
 5. **Matriz de IA com threshold de promoção** — `docs/process/04-matriz-ia.md:28-37`: ASSIST vira AUTO só com correção humana < 5% por 8 semanas, sem erro de impacto e com aprovação escrita; volta um nível acima de 10%; lista fechada do que nunca automatizar. É o driver "guardrails com thresholds" entregue de forma mais concreta que em qualquer review aprovado que eu li. **Owner: process-architect.**
 
@@ -94,7 +96,7 @@ Ordenado por dano se ficar como está.
 - `process-log/README.md:10` promete `critique/` = "Críticas adversariais multi-modelo + síntese (G8)". `ls process-log/critique/` → só `.gitkeep`. Isso deixa **D10 da própria rubrica sem cumprir** (`docs/differentiation-rubric.md:18` exige "crítica multi-modelo"), e `:3` afirma que "a submissão só vai para PR com todos os itens em ✅".
 - `process-log/README.md:16` cita `chat-exports/g0-calibracao-e-plano.md` "(a exportar)"; `:19-21` abre a tabela "Linha do tempo por gate" e preenche **só a linha do G0**.
 
-Por que importa: os 46 prints são todos do **baseline** (as 5 IAs respondendo o brief cru), não da sessão que construiu a solução. A evidência da sessão de trabalho é hoje só narrativa. Formalmente basta (`submission-guide.md:22`, "escolha um ou combine"), e o #72 levou esse mesmo gap como não-bloqueador — mas o #103 levou **CHANGES_REQUESTED** por "process log praticamente vazio", e um checkbox desmarcado no README aponta o dedo para o próprio buraco.
+Por que importa: os 46 prints são todos do **baseline** (as 5 IAs respondendo o brief cru), não da sessão que construiu a solução. A evidência da sessão de trabalho é hoje só narrativa. Formalmente basta (`submission-guide.md:22`, "escolha um ou combine"), e o #72 levou esse mesmo gap como não-bloqueador — mas process log incompleto aparece como motivo de correção nos reviews públicos, e um checkbox desmarcado no README aponta o dedo para o próprio buraco.
 Correção: exportar o transcript da sessão para `chat-exports/`, rodar a crítica multi-modelo para `critique/`, completar a tabela G0–G8 e marcar a caixa. Se algo não for entregue, **apagar a promessa** em vez de deixá-la pendente.
 **Owner: process-log-keeper.**
 
@@ -123,7 +125,7 @@ shares identico ao CSV bruto: True  comments_count: True
 platform: True                      creator_name: True
 ```
 
-`app/README.md:35` chama de "derivado", mas é uma **projeção de colunas**, não uma agregação. E a entrada da `.gitignore` foi removida de propósito para que ele entrasse (`process-log/ai-errors.md:20`) — decisão documentada, com motivo válido (o app publicado abriria vazio), o que a salva de ser bloqueador. Ainda assim o PR #96 levou **"🔴 Hygiene reprovada"** com a instrução literal de remover "datasets brutos do challenge" do versionamento, e a `.gitignore:1-2` da submissão anuncia "Dados brutos: baixar com `scripts/download_data.py`" enquanto eles estão ali.
+`app/README.md:35` chama de "derivado", mas é uma **projeção de colunas**, não uma agregação. E a entrada da `.gitignore` foi removida de propósito para que ele entrasse (`process-log/ai-errors.md:20`) — decisão documentada, com motivo válido (o app publicado abriria vazio), o que a salva de ser bloqueador. Ainda assim, dataset bruto versionado é motivo de reprovação por higiene nos reviews públicos, e a `.gitignore:1-2` da submissão anuncia "Dados brutos: baixar com `scripts/download_data.py`" enquanto eles estão ali.
 Correção (uma das duas): (a) substituir por estatísticas suficientes por célula (M4) e reativar a regra de `.parquet`; ou (b) manter e declarar em uma linha no `app/README.md` **por que** o arquivo é necessário para o deploy, que é um subconjunto de colunas do dataset público MIT, e que os 23 MB brutos seguem fora.
 **Owner: tool-builder.**
 
