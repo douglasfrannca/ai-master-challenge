@@ -197,4 +197,4 @@ uv run streamlit run app/streamlit_app.py
 
 ---
 
-_Submissão enviada em: [data do PR]_
+_Submissão enviada em: 18/09/2026_
