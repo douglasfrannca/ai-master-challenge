@@ -10,7 +10,11 @@
 
 ## Executive Summary
 
-Auditei os 52.214 posts antes de analisar e provei **por que** eles não sustentam decisão: views, likes, shares e comentários foram sorteados de uma distribuição de Poisson com **a mesma média para todos os posts** (variância/média entre 0,99 e 1,00). Com uma régua de decisão definida antes dos testes (±1 p.p. de taxa de engajamento), as **335 comparações** feitas em Instagram, TikTok e YouTube deram **equivalentes**: nem canal, formato, creator, audiência ou patrocínio muda o resultado. Patrocínio empata com orgânico (−0,003 p.p.) e, no melhor cenário, gera 0,77 interação extra por post, o que cobre **menos de 1%** do fee de um micro-influenciador. Por isso, a recomendação não é trocar de canal: é **suspender novos patrocínios, ligar o custo do CRM ao post e à venda, e decidir em ciclos de 30 dias com régua prévia**. Entrego o processo redesenhado (com a IA nos pontos certos e um dono para cada decisão) e o [**Decision Gate**](https://decision-social-doug.streamlit.app), a ferramenta que executa esse processo.
+O problema do Head não é escolher o canal certo. É que a operação de marketing hoje **não consegue saber** qual canal, formato ou patrocínio funciona: o custo do contrato fica no CRM, o post fica na plataforma, a venda fica em outro sistema, e ninguém liga os três. Por isso a entrega principal é um **processo de decisão redesenhado**: o fluxo atual (AS-IS) com 8 pontos de falha; o fluxo novo (TO-BE) em ciclos de 15 e 30 dias; uma matriz que diz onde a IA executa, onde ela ajuda e onde só uma pessoa decide; um responsável (RACI) para cada decisão; e um contrato de dados que barra post sem custo, campanha e venda. O [**Decision Gate**](https://decision-social-doug.streamlit.app) é a ferramenta que executa esse processo.
+
+Os dados provam a necessidade. Auditei os 52.214 posts antes de analisar: views, likes, shares e comentários foram sorteados de uma distribuição de Poisson com **a mesma média para todos os posts** (variância/média entre 0,99 e 1,00). Com uma régua definida antes dos testes (±1 p.p. de taxa de engajamento), as **335 comparações** em Instagram, TikTok e YouTube deram **equivalentes**. Patrocínio empata com orgânico (−0,003 p.p.) e, no melhor cenário, gera 0,77 interação extra por post, o que cobre **menos de 1%** do fee de um micro-influenciador. Decidir com base neste arquivo é decidir com base em ruído, e foi o que 2 das 5 IAs do baseline recomendaram (uma delas mandava realocar 70% da verba).
+
+**Na segunda-feira:** suspender novos patrocínios, ligar o custo do CRM ao post e à venda, e decidir em ciclos de 30 dias com régua prévia.
 
 ---
 
@@ -18,10 +22,10 @@ Auditei os 52.214 posts antes de analisar e provei **por que** eles não sustent
 
 | O quê | Onde |
 |---|---|
+| 🔁 **Arquitetura de processo** (AS-IS → TO-BE, IA, RACI, dados, 30/60/90) | [`docs/process/`](docs/process/README.md) |
 | 🚦 **Ferramenta no ar** (sem login, sem instalação) | **https://decision-social-doug.streamlit.app** |
 | Estratégia priorizada para o Head | [`reports/strategy.md`](reports/strategy.md) |
 | Resumo de 1 página | [`reports/executive-one-pager.md`](reports/executive-one-pager.md) |
-| Arquitetura de processo (AS-IS → TO-BE, IA, RACI, dados, 30/60/90) | [`docs/process/`](docs/process/README.md) |
 | Auditoria dos dados | [`docs/data-quality-report.md`](docs/data-quality-report.md) |
 | Análise estatística | [`docs/statistical-report.md`](docs/statistical-report.md) |
 
@@ -37,6 +41,8 @@ Trabalhei em **gates**: cada etapa só fecha com uma decisão minha registrada e
 | **G4 · Processo** | Que operação gera dados assim, e como consertar? | Dois fluxos (conteúdo e parcerias), 8 pontos de falha, TO-BE em ciclo de 15/30 dias, matriz de IA, RACI, contrato de dados |
 | **G5 · Estratégia** | O que fazer na segunda-feira? | 7 decisões com dono e condição de parada, custo implícito com preços de mercado, 3 testes |
 | **G6 · Ferramenta** | Como rodar isso todo dia? | Decision Gate em 4 abas, 24 testes, publicado |
+| **G7 · Evidências** | Dá para auditar como a IA foi usada? | 18 decisões minhas, 20 erros da IA registrados no momento e 46 prints das 5 IAs do baseline |
+| **G8 · Crítica adversarial** | Onde a entrega é fraca? | Um revisor calibrado nos reviews públicos do repositório reproduziu tudo do zero e apontou 5 problemas ([`review-verdict-round1.md`](reports/review-verdict-round1.md)); o que foi corrigido e como está em [`process-log/critique/`](process-log/critique/critique-synthesis.md) |
 
 **Escopo:** a empresa investe em **Instagram, TikTok e YouTube**. Bilibili e RedNote (também presentes no arquivo) entram só como referência, por não alcançarem o público brasileiro.
 
